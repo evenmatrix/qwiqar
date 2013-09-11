@@ -69,7 +69,7 @@ Qwiqar::Application.configure do
       :address              => "smtp.gmail.com",
       :port                 =>  587,
       :domain               => 'qwiqar.com',
-      :user_name            => 'qwiqar@gmail.com',
+      :user_name            => 'notifier.qwiqar@gmail.com',
       :password             => 'roseline007',
       :authentication       => 'plain',
       :enable_starttls_auto => true  }
