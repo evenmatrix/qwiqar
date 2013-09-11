@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>QwiQar</title>
+  <style>
+      body{
+          -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
+          -webkit-text-size-adjust: 100%;
+          color: #555;
+          font-weight: 300;
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif ;
+          overflow-x: hidden;
+          background: url("/assets/pinstripe.gif");
+      }
+      a {
+          color: #159ceb;
+          cursor: pointer;
+          text-decoration: none;
+          -moz-transition: color .2s;
+          -o-transition: color .2s;
+          -webkit-transition: color .2s;
+          transition: color .2s;
+      }
+      a:hover{
+          color: #0fff4c;
+          text-decoration: none;
+      }
+      .container .brand {
+          margin: 20px 0;
+          overflow: hidden;
+      }
+      img {
+          max-width: 100%;
+          width: auto;
+          height: auto;
+          vertical-align: middle;
+          border: 0;
+          -ms-interpolation-mode: bicubic;
+      }
+      h1, h2, h3, h4, h5, h6 {
+          margin: 10px 0;
+          font-family: inherit;
+          font-weight: bold;
+          line-height: 20px;
+          color: inherit;
+          text-rendering: optimizelegibility;
+      }
+      h1,h2, h3{
+          font-weight: 100;
+          line-height: 1em;
+          margin: 0 0 20px;
+      }
+      h1{
+          font-weight: 100;
+          font-size: 3em;
+      }
+      h3{
+          font-size: 1.4666666666666667em;
+          font-weight: 300;
+      }
+      .container {
+          margin-right: auto;
+          margin-left: auto;
+      }
+      .content{
+          text-align: center;
+          max-width: 640px;
+          margin: 30px auto;
+          width:100%;
+          background-color: #fffdfd;
+          padding: 35px;
+          -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.25);
+          -moz-box-shadow: 0 0 4px rgba(0,0,0,0.25);
+          box-shadow: 0 0 4px rgba(0,0,0,0.25);
+          border:1px solid #ccc;
+      }
+      .divider-horizontal{
+          margin: 10px auto;
+          height: 12px;
+          background: url('/assets/diagonal-pattern.png') repeat-x;
+      }
+      .heading{
+          margin: 20px 0;
+      }
+      .heading h1{
+          line-height: 1.2em;
+      }
+      .icon_wrap{
+          margin-bottom: 30px;
+      }
+      .icon_wrap img{
+          width:60px;
+          height: 60px;
+      }
+      .logo-name{
+          font-family: "Myriad Pro";
+          color: #159ceb;
+          font-weight: 300;
+          font-style: italic;
+      }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="content">
+    <div class="brand">
+      <div class="icon_wrap">
+        <img src="/assets/icon-web-x.png"/>
+        <h3 class="logo-name"><a href="http://localhost:3000/">QwiQar</a></h3>
+      </div>
+    </div>
+    <div class="divider-horizontal"></div>
+    <div class="heading">
+      <h1>Thank you <%= @feedback.name %>, we received your feedback</h1>
+    </div>
+  </div>
+</div>
+</body>
+</html>

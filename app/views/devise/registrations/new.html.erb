@@ -1,0 +1,41 @@
+<div class="cover">
+  <section id="section1" class="box hero static">
+    <div class="row-fluid">
+      <div class="content">
+        <div class="sign_board">
+          <%= render partial: "layouts/app_call" %>
+
+          <div class="span5 offset1">
+            <div class="">
+              <%= simple_form_for(resource, :as => resource_name,:html =>{:class=>"form-horizontal"}, :url => user_registration_path) do |f| %>
+                  <div class="form-body  row-fluid">
+                    <div class="">
+                      <%= render partial: "layouts/errors" %>
+                      <h3 class="bold_label">Sign Up</h3>
+                      <div class="separator-pattern"></div>
+                      <div class="form-inputs ">
+                        <%= f.input :first_name, :wrapper_html => { :class => 'control-group input_padding_extra' },:input_html => {:class=>"span12"} %>
+                        <%= f.input :last_name, :wrapper_html => { :class => 'control-group input_padding_extra' },:input_html => {:class=>"span12"} %>
+                        <%= f.input :email, :wrapper_html => { :class => 'control-group input_padding_extra' },:input_html => {:class=>"span12 "} %>
+                        <%= f.input :password, :wrapper_html => { :class => 'control-group input_padding_extra' },:input_html => {:class=>"span12"} %>
+                        <%= f.input :password_confirmation, :wrapper_html => { :class => 'control-group input_padding_extra' },:input_html => {:class=>"span12"} %>
+
+                      </div>
+                    </div>
+                    <div class="join ">
+                      <%= f.submit "Create Account",:class => "btn primary-main btn-success" %>
+                    </div>
+                    <a class="fb-connect centre-button">
+                      <%= image_tag "fbconnect.png" %>
+                    </a>
+                  </div>
+              <% end %>
+            </div>  </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Begin Overview -->
+</div>
+

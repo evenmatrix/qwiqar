@@ -1,0 +1,15 @@
+<% content_for :sign_login do %>
+    <% if sign_in_tab %>
+        <div class="sign_up pull-right">
+          <% if sign_in_tab == "login"%>
+              <%= link_to "Sign Up",new_user_registration_path,class:"btn btn-large  btn-success"%>
+          <% end %>
+
+          <% if sign_in_tab == "logout"%>
+              <%= link_to "#",class:"btn btn-inverse" do %>
+                  Login
+              <% end %>
+          <% end %>
+        </div>
+    <% end %>
+<% end %>
