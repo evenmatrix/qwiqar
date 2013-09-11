@@ -75,6 +75,5 @@ Qwiqar::Application.configure do
       :enable_starttls_auto => true  }
   ignore_exceptions = ExceptionNotifier.default_ignore_exceptions + [ActionView::MissingTemplate]
   config.middleware.use ExceptionNotifier, :email_prefix => "[ERROR] ", :sender_address => 'noreply@qwiqar.com', :exception_recipients => %w(ramzauchenna@gmail.com evenmatrix@gmail.com), :ignore_exceptions => ignore_exceptions
-
-  config.action_mailer.default_url_options = { :host => "qwiqar.com"
+  config.action_mailer.default_url_options = { :host => "qwiqar.com"}
 end
