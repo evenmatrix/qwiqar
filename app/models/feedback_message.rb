@@ -6,6 +6,7 @@ class FeedbackMessage < ActiveRecord::Base
   after_create    :send_mail
   def send_mail
     FeedbackMailer.feedback_notice(self).deliver
+    FeedbackMailer.notify_respondents(self).deliver
   end
 
 

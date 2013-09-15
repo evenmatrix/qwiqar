@@ -25,7 +25,7 @@
         }
         .brand{
             background-color: #159ceb;
-            padding: 40px 20px;
+            padding:35px 20px;
             margin: -34px -34px 35px;
             border-bottom: 1px solid #1d61cc;
         }
@@ -57,8 +57,6 @@
             font-weight: 100;
             line-height: 1em;
             margin: 0 0 20px;
-
-            font-family: "Helvetica Neue",helvetica,arial,sans-serif;
         }
         h1{
             font-weight: 100;
@@ -82,15 +80,12 @@
             -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.25);
             -moz-box-shadow: 0 0 4px rgba(0,0,0,0.25);
             box-shadow: 0 0 4px rgba(0,0,0,0.25);
-            border:1px solid #98c3d9;
+            border:1px solid #ccc;
         }
         .divider-horizontal{
             margin: 10px auto;
             height: 12px;
             background: url('/assets/diagonal-pattern.png') repeat-x;
-        }
-        .header{
-            padding: 20px;
         }
         .heading{
             margin: 20px 0;
@@ -110,12 +105,13 @@
             font-weight: 300;
             font-style: italic;
             margin-bottom: 0;
+            text-align: left;
         }
         .lead{
             text-align: center;
         }
         .field-container{
-            text-align: left;
+           text-align: left;
         }
         .message_original,field-container{
             font-family: "Helvetica Neue",helvetica,arial,sans-serif;
@@ -130,16 +126,23 @@
             <div class="icon_wrap">
                 <h3 class="logo-name">
                     <a href="http://localhost:3000/">
-                        <img src="/assets/app-title.png"/>
+                    <img src="/assets/app-title.png"/>
                     </a>
                 </h3>
             </div>
         </div>
-
-        <div class="field-container header">
-            <h1 class="lead">Thank you <strong>Paul Smith</strong> for sending your feedback</h1>
+        <div class="field-container">
+            <h4>From</h4>
+            <p>Paul</p>
         </div>
-        <div class="divider-horizontal"></div>
+        <br/>
+
+        <div class="field-container">
+            <h4>Email</h4>
+            <p>rzaartz@gmail.com</p>
+        </div>
+        <br/>
+
         <div class="field-container">
             <h4>Title</h4>
             <p>The End is near</p>
