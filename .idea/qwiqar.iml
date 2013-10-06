@@ -29,6 +29,7 @@
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.3.5, rbenv: 2.0.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="cancan (v1.6.9, rbenv: 2.0.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="capistrano (v2.15.3, rbenv: 2.0.0-p0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="chosen-rails (v0.9.14, rbenv: 2.0.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="climate_control (v0.0.3, rbenv: 2.0.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="cocaine (v0.5.1, rbenv: 2.0.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="coffee-rails (v3.2.2, rbenv: 2.0.0-p0) [gem]" level="application" />

@@ -24,8 +24,9 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-
+gem 'chosen-rails'
 gem 'devise'
+#gem 'devise_sms_activable'
 gem 'attr_encrypted'
 gem 'cancan'
 #gem 'whenever', require: false

@@ -1,51 +1,78 @@
 <div class="page">
   <div class="row-fluid">
-    <aside class="span4">
-    <div class="box">
-      <div class="user-info">
-        <div class="avatar">
-          <%= image_tag "avatar.png" %>
-        </div>
-        <div class="detail">
-          <div class="name elp">
-            <h4 class="ui-inline-text">Paul Aden Smith alonso</h4>
-          </div>
-        </div>
-      </div>
-      <div class="clearfix divider-horizontal"></div>
-      <div class="btns">
-        <a class="btn">
-          <i class="icon-edit"></i>
-        </a>
-        <span class="account-label label label-success">$60,000</span>
-      </div>
-    </div>
-
-      <div class="box box-lead">
-        <ul class="nav nav-list">
-          <li class="active"><a href="#"><i class="icon-mobile"></i> Top Up</a></li>
-          <li><a href="#"><i class="icon-diary"></i> Wallet</a></li>
-          <li><a href="#"><i class="icon-users"></i> People</a></li>
-          <li><a href="#"><i class="icon-gift"></i> Gift Card</a></li>
-          <li><a href="#"><i class="icon-history"></i> History</a></li>
-        </ul>
-      </div>
-    </aside>
+    <%= render partial: "layouts/side_nav" %>
     <div class="main span8">
-      <div class="box">
+      <div id="topUp" class="box">
         <ul class="nav nav-tabs">
           <li class="active">
-                <a
-               href="#">My Phone
-            </a>
+            <a href="#quickTopUp" data-toggle="tab">Quick Top Up</a>
           </li>
-          <li class="dropdown">
-            <a
-               href="#">Others
-            </a>
+          <li>
+            <a href="#groupTopUp" data-toggle="tab" >Group Top Up </a>
           </li>
         </ul>
+        <div class="tab-contentx">
+          <div id="quickTopUp" style="display: none;" class="tab-pane">
+            <div class="top-btn-container row-fluid">
+              <div class="custom-select-wrap input-prepend span6">
+                <span class="add-on"><i class="icon-mobile"></i> Phone Number </span>
+                <div class="custom-select-input-wrap">
+                  <select id="phoneNumberSelect" class="span12" >
+                    <option class="phone-icon">08055431397 (Work)</option>
+                    <option class="phone-icon">08097530118 (Work)</option>
+                    <option class="phone-icon">08065430389 (Work)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="custom-select-wrap input-prepend rt span6">
+                <span class="add-on ">N Amount</span>
+                <div class="custom-select-input-wrap">
+                  <select id="amountSelect" class="span12">
+                    <option>100</option>
+                    <option>200</option>
+                    <option>300</option>
+                    <option>400</option>
+                    <option>500</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="button-wrap clearfix">
+              <button class="btn btn-primary">Top Up</button>
+            </div>
+          </div>
+          <div id="groupTopUp" class="tab-pane">
+            <form class="group-topup-form">
+              <div class="control-group">
+                <label class="control-label" for="inputPassword">ADD RECIPIENTS</label>
+                <div class="controls input_padding_extra ">
+                  <a href="#contactPicker" role="button" data-toggle="modal" class="btn tool-button"><i class="icon-plus"></i></a>
+                  <input type="password" class="span12" id="inputPassword" placeholder="Type a contact name">
+                </div>
+              </div>
+            </form>
+        </div>
+        </div>
       </div>
     </div>
     </div>
+</div>
+
+<% content_for :javascript_contents do %>
+    <%= javascript_include_tag "top_up" %>
+<% end %>
+
+<div class="modal hide fade" id="contactPicker" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><i class="icon-info"></i> Pick Contact</h3>
+  </div>
+  <div class="modal-body">
+    <div class="contactPicker">
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn rt" data-dismiss="modal" aria-hidden="true"><i class="icon-angleright"></i></button>
+  </div>
 </div>

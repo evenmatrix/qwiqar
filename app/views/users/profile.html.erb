@@ -1,0 +1,182 @@
+<div class="page">
+  <div class="row-fluid">
+    <%= render partial: "layouts/side_nav" %>
+    <div class="main span8">
+      <div id="profilePhoto" class="box">
+      <header class="header-box">
+        <h3 class="heading"><i class="icon-picture"></i> Photo</h3>
+        <div class="toolbox">
+          <a href="#editPhotoModal" role="button" class="btn" data-toggle="modal" class="btn" ><i class="icon-edit"></i></a>
+        </div>
+      </header>
+      <div class="content">
+        <div class="profile-image-wrap">
+          <%= image_tag "avatar.png" %>
+        </div>
+      </div>
+    </div>
+      <div id="profileDetails" class="box">
+        <header class="header-box">
+          <h3 class="heading"><i class="icon-information"></i> Basic Info</h3>
+          <div class="toolbox">
+            <a href="#editInfoModal" role="button" class="btn" data-toggle="modal" class="btn" ><i class="icon-edit"></i></a>
+          </div>
+        </header>
+        <div class="content">
+          <div class="profile-details-wrap">
+            <ul>
+              <li class="row-fluid info-block ">
+                <div class="span3 title">First Name</div>
+                <div class="span8 value">Onyemaechi</div>
+              </li>
+              <li class="row-fluid info-block ">
+                 <div class="span3 title">Last Name</div>
+                 <div class="span8 value">Okafor</div>
+              </li>
+              <li class="row-fluid info-block">
+                <div class="span3 title">Email</div>
+                <div class="span8 value">rzaartz@yahoo.com</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="profileNumber" class="box">
+        <header class="header-box">
+          <h3 class="heading"><i class="icon-mobile"></i> Phone Number</h3>
+          <div class="toolbox">
+            <a class="btn"><i class="icon-plus"></i></a>
+          </div>
+        </header>
+        <div class="content">
+          <ul class="profile-number-wrap">
+             <li class="row-fluid">
+               <a class="row-inner">
+                 <div class="span4">Contact</div>
+                 <div class="span4">08099447050</div>
+                 <div class="span4 row-button"><button class="btn" type="button" data-toggle="modal" data-target="#phoneNumberModal"><i class="icon-edit"></i></button></div>
+               </a>
+             </li>
+            <li class="row-fluid">
+              <a class="row-inner">
+                <div class="span4">Contact</div>
+                <div class="span4">08099447050</div>
+                <div class="span4 row-button"><button class="btn"><i class="icon-edit"></i></button></div>
+              </a>
+            </li>
+            <li class="row-fluid">
+              <a class="row-inner">
+                <div class="span4">Contact</div>
+                <div class="span4">08099447050</div>
+                <div class="span4 row-button"><button class="btn"><i class="icon-edit"></i></button></div>
+              </a>
+            </li>
+            <li class="row-fluid">
+              <a class="row-inner">
+                <div class="span4">Contact</div>
+                <div class="span4">08099447050</div>
+                <div class="span4 row-button"><button class="btn"><i class="icon-edit"></i></button></div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :javascript_contents do %>
+    <%= javascript_include_tag "profile" %>
+<% end %>
+
+<div class="modal hide fade " id="editPhotoModal" role="dialog" aria-labelledby="editPhotoModal" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><i class="icon-picture"></i> Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <div class="dropBox">
+      <div class="inner">
+        <a id="pick" class="upload_btn disabled photo_chooser" >
+              <span class="ui-btn-inner">
+              <span class="ui-icon"><i class="icon-picture"></i></span>
+                <span class="ui-text">Pick a photo or drag photo here</span>
+              </span>
+        </a>
+      </div>
+      <div class="photo-upload-progress">
+        <span class="help-inline"><i class="icon-picture"></i> <span class="status">uploading 40%</span></span>
+        <div class="progress progress-success progress-striped active">
+          <div class="bar" style="width:40%"></div>
+        </div>
+      </div>
+      <div class="photo-upload-error">
+        <div class="alert alert-error">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <i class="icon-warning-sign"></i> <strong> Error occurred!</strong>
+        </div>
+      </div>
+    </div>
+    <div class="previewBox">
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Save changes</button>
+  </div>
+</div>
+
+<div class="modal hide fade" id="editInfoModal" role="dialog" aria-labelledby="editPhotoModal" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><i class="icon-info"></i> Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <%= simple_form_for(@user, :html =>{:class=>"form-horizontal"}, :url => user_registration_path) do |f| %>
+        <div class="form-body  row-fluid">
+            <div class="form-inputs ">
+              <div class="control-group">
+                <%=f.label :first_name,:class=>"control-label",:required =>false%>
+                <%= f.input :first_name,:label =>false, :wrapper_html => { :class => 'controls input_padding_extra' },:input_html => {:class=>""} %>
+              </div>
+              <div class="control-group">
+                <%=f.label :last_name,:class=>"control-label",:required =>false%>
+                <%= f.input :last_name, :label =>false,:wrapper_html => { :class => 'controls input_padding_extra' },:input_html => {:class=>""} %>
+              </div>
+             </div>
+        </div>
+    <% end %>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Save changes</button>
+  </div>
+</div>
+
+<div class="modal hide fade" id="phoneNumberModal" role="dialog" aria-labelledby="editPhotoModal" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><i class="icon-info"></i> Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal">
+      <div class="control-group">
+        <label class="control-label" for="inputEmail">Name</label>
+        <div class="controls input_padding_extra">
+          <input type="text" id="inputEmail" placeholder="Email">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="inputPassword">Phone Number</label>
+        <div class="controls input_padding_extra">
+          <input type="password" id="inputPassword" placeholder="Password">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Save changes</button>
+  </div>
+</div>

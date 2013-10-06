@@ -47,8 +47,7 @@ class UsersController < ApplicationController
 
   def profile
     @user ||= User.find(params[:id])
-    if current_user.can_edit?(@user)
-      @user = User.find(params[:id])
+    if @user && current_user== @user
     else
       render :text => 'Sorry you are not authorized to do that', :layout => true, :status => 401
     end

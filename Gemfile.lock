@@ -40,6 +40,10 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
+    chosen-rails (0.9.14)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sass-rails (>= 3.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -200,6 +204,7 @@ DEPENDENCIES
   attr_encrypted
   cancan
   capistrano
+  chosen-rails
   coffee-rails (~> 3.2.1)
   devise
   exception_notification

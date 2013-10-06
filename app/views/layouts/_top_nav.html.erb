@@ -1,6 +1,5 @@
-<div class="nav-collapse collapse">
-  <% if current_user %>
-      <ul class="user_nav nav  pull-right">
+<% if current_user %>
+
         <li class="dropdown">
           <a href="<%= user_root_url %>" class="dropdown-toggle"
              data-toggle="dropdown"
@@ -16,8 +15,7 @@
         <li class="">
           <%= link_to "logout",user_sign_out_url %>
         </li>
-      </ul>
   <% else %>
+
       <%=  content_for?(:sign_login) ? yield(:sign_login)  : yield(:default_sign_login)%>
   <% end %>
-</div>

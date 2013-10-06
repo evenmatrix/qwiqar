@@ -1,0 +1,17 @@
+<%= form_for(@top_up) do |f| %>
+  <% if @top_up.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@top_up.errors.count, "error") %> prohibited this top_up from being saved:</h2>
+
+      <ul>
+      <% @top_up.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

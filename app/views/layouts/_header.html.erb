@@ -1,8 +1,16 @@
  <% content_for :default_sign_login do %>
     <ul class="nav pull-right">
+
+      <li class="">
+        <%= link_to "http://www.facebook.com/qwiqar" do %>
+            <i class="icon-facebook"></i>
+        <% end %>
+      </li>
       <li class="divider-vertical"></li>
       <li class="">
-        <%= link_to "Login",new_user_session_path %>
+        <%= link_to "http://www.twitter.com/@qwiqar" do %>
+            <i class="icon-twitter"></i>
+        <% end %>
       </li>
     </ul>
 <% end %>
@@ -18,17 +26,7 @@
          <%= image_tag "app-title.png" %>
       <% end %>
       <ul class="user_nav nav  pull-right">
-        <li class="">
-          <%= link_to "http://www.facebook.com/qwiqar" do %>
-            <i class="icon-facebook"></i>
-          <% end %>
-        </li>
-        <li class="divider-vertical"></li>
-        <li class="">
-          <%= link_to "http://www.twitter.com/@qwiqar" do %>
-              <i class="icon-twitter"></i>
-          <% end %>
-        </li>
+        <%= render partial: "layouts/top_nav" %>
       </ul>
       </div>
   </div>
