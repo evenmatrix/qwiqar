@@ -23,6 +23,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery_ujs
 //= require utils
 //= require twitter/bootstrap
 //= require jQuery.fileinput
@@ -37,13 +38,15 @@
 $(document).ready(
     new function() {
         /**
-         $(".chzn-select").chosen();// $('select').selectmenu();
-         $('.xfile').customFileInput();
+         $(".chzn-select").chosen();//
          /**
          $("#branch_tag_list").tokenInput("/tags", {
          jsonContainer:"tags",
          hintText:'Type a name',
          tokenValue:'name'
          });  **/
-
+        ;
+        $('.xfile').customFileInput();
+        $('.payment').selectmenu();
+        $(".amountSelect").chosen();
     });

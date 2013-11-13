@@ -62,7 +62,7 @@ if (!Function.prototype.bind) {
  *  Return the index of an object in an array.
  *
  *  This function is not supplied by some JavaScript implementations, so
- *  we provide it if it is missing.  This code is from:
+ *  we provide it if it is icon.  This code is from:
  *  http://developer.mozilla.org/En/Core_JavaScript_1.5_Reference:Objects:Array:indexOf
  *
  *  Parameters:
@@ -2541,7 +2541,7 @@ Strophe.Connection.prototype = {
         }
 
         // check to make sure we don't overwrite these if _connect_cb is
-        // called multiple times in the case of missing stream:features
+        // called multiple times in the case of icon stream:features
         if (!this.sid) {
             this.sid = bodyWrap.getAttribute("sid");
         }

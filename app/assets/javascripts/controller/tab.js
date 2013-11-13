@@ -2,25 +2,26 @@ jQuery(function($){
     window.TabController=Spine.Controller.create({
         elements:{
             '.tab-body':"tabBody",
-            ".nav.tabs":'tabsNav',
-            ".nav.tabs li":"handlers"
+            ".nav.nav-tabs":'tabsNav',
+            ".nav.nav-tabs li":"handlers"
         },
         proxied:['keydown','selectTabFromHash','popState'],
         tabIDprefix:"tab-",
         init:function(){
            // this.tabsNav = this.el.find('ul.nav');
             this.handlers.each(this.proxy(function(i,item){
-                console.log("item",$(item).find('a'))
+                //console.log("item",$(item).find('a'))
+                var target=($(item).find('a').data('target').split('#')[1]||$(item).find('a').attr('href').split('#')[1])
                 $(item)
                     .attr('role','tab')
-                    .attr('id',this.tabIDprefix +$(item).find('a').attr('href').split('#')[1] );
+                    .attr('id',this.tabIDprefix + target);
             }));
             this.tabsNav.find('a').attr('tabindex','-1');
             this.tabsNav.find('a').click(this.proxy(this.click));
             this.tabBody.find('>div').each(this.proxy(function(i,item){
                 $(item)
-                    .addClass('tab-pane')
-                    .attr('role','tabpanel')
+                    .addClass('tab-panel')
+                    .attr('role','tab-panel')
                     .attr('aria-hidden', true)
                     .attr('aria-labelledby',this.tabIDprefix + $(item).attr('id'));
             }));
@@ -35,10 +36,12 @@ jQuery(function($){
             this.tabsNav.find('li.'+this.options.activeTabClass).removeClass(this.options.activeTabClass).find('a').attr('tabindex','-1');
             tab.attr('tabindex','0').parent().addClass(this.options.activeTabClass);
             this.tabBody.find('>div.'+this.options.activePanelClass).attr('aria-hidden',true).removeClass(this.options.activePanelClass);
-            $( tab.attr('href') ).addClass(this.options.activePanelClass).attr('aria-hidden',false);
+            var target=($(tab).data('target')||$(tab).attr('href'))
+            //console.log("target", target)
+            $(target).addClass(this.options.activePanelClass).attr('aria-hidden',false);
             ///tab[0].focus();
             //this.saveState(tab);
-            this.App.trigger(tab.attr("data-action"))
+            this.App.trigger(tab.data("action"),$(tab).attr('href'))
         },
         click:function(event){
             this.selectTab($(event.currentTarget));

@@ -1,0 +1,17 @@
+<%= simple_form_for(@contact, :html =>{:id=>"editContactForm",:class=>"form-horizontal"}, :url => user_contact_path(current_user,@contact)) do |f| %>
+    <div class="row-fluid">
+      <%= render :partial => "contacts/form" ,:locals => {:f=>f}%>
+      <div class="control-group">
+        <div class="controls">
+          <button class="btn doEdit btn-success" data-loading-text="Loading..." type="submit" >
+            <i class="icon-edit"></i> Edit
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+
+    </div>
+
+<% end %>

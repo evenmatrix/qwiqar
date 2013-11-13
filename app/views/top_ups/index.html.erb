@@ -1,21 +1,269 @@
-<h1>Listing top_ups</h1>
+<div class="page">
+  <div class="row-fluid">
+    <%= currently_at_side_nav 'Quick Top Up' %>
+    <div class="main span8">
+      <div id="topUp" class="">
+        <div id="quickTopUp" class="">
+          <div class="top-up-wrap box">
+            <form class="form-horizontal letterPressed">
+              <header class="box-header">
+                <h3 class="light-header">Quick Top Up</h3>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+                <div class="shadow-bottom-wrap">
+                  <div class="shadow-top"></div>
+                </div>
+              </header>
+              <div class="control-group">
+                <label class="control-label" for="inputPassword"><i class="icon-mobile"></i> Phone Number</label>
+                <div class="controls controls-row input_padding_extra">
+                  <select class="networkChoice " data-class="span4" placeholder="carrier">
+                    <option value="4" >Airtel</option>
+                    <option value="1">Etisalat</option>
+                    <option value="3">Glo</option>
+                    <option value="2">MTN</option>
+                  </select>
+                  <input type="text" placeholder="080xxxxxxxxx" class="span8"/>
+                </div>
+              </div>
+              <div class="selections">
+                <div class="control-group">
+                  <label class="control-label" for="inputPassword"><i class="icon-money"></i> Amount</label>
+                  <div class="controls controls-row input_padding_extra ">
+                    <select  class="amountSelect span12">
+                      <option>100</option>
+                      <option>200</option>
+                      <option>300</option>
+                      <option>400</option>
+                      <option>500</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="inputPassword"><i class="icon-key"></i> Password</label>
+                <div class="controls controls-row input_padding_extra ">
+                  <input type="password" placeholder="password" class="span12"/>
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="controls controls-row input_padding_extra ">
+                  <button class="btn btn-warning btn-large" type="button" ><i class="icon-send"></i> Top Up : ₦60,000</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="">
+            <div class="tableContent">
+              <header class="letterPressed clearfix">
+                <div class="top-btn-container">
+                  <h5 class="light-header pull-left">
+                    <i class="icon-time"></i> History
+                  </h5>
+                  <span class="tool-bar">
+                    <button class="btn" type="button"><i class="icon-double-angle-left"></i></button>
+                    &nbsp;  2/6   &nbsp;
+                    <button class="btn" type="button"><i class="icon-double-angle-right"></i></button>
+                    <div class="btn-group">
+                      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                        Action
+                        <span class="caret"></span>
+                      </a>
+                      <div class="dropdown-menu">
+                        <form class="drop-form">
+                          <div class="control-group">
+                            <label class="control-label" for="inputPassword"><i class="icon-calendar"></i> Start Date</label>
+                            <div class="controls input_padding_extra ">
+                              <input type="date" placeholder="password" class="span12"/>
+                            </div>
+                          </div>
+                          <div class="control-group">
+                            <label class="control-label" for="inputPassword"><i class="icon-calendar"></i> End Date</label>
+                            <div class="controls input_padding_extra ">
+                              <input type="date" placeholder="2/12/2013" class="span12"/>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </span>
 
-<% @top_ups.each do |top_up| %>
-  <tr>
-    <td><%= link_to 'Show', top_up %></td>
-    <td><%= link_to 'Edit', edit_top_up_path(top_up) %></td>
-    <td><%= link_to 'Destroy', top_up, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
 
-<br />
+                  <div class="input-append input-prepend">
+                    <span class="add-on"><i class="icon-search"></i></span>
+                    <input class="span8" id="appendedInputButtons" size="16" type="text"><button class="btn" type="button">Search</button>
 
-<%= link_to 'New Top up', new_top_up_path %>
+                  </div>
+                </div>
+
+                <div class="shadow-bottom-wrap">
+                  <div class="shadow-top"></div>
+                </div>
+              </header>
+              <div class="tableContainer">
+                <table class="table letterPressed table-hover">
+                  <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% content_for :javascript_contents do %>
+      <%= javascript_include_tag "top_up" %>
+  <% end %>
+  <div class="modal hide" id="editModal" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <div class="contactHeader">
+        <div class="icon">
+          <div class="avatar">
+            <%= image_tag "avatar.png" %>
+          </div>
+        </div>
+        <div class="info indent">
+          <h3>Paul Adeferati</h3>
+          <p class="hint">08099447050</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="content modal-body override">
+      <form class="overrideContact wrap">
+        <div class="row-fluid">
+
+          <div class="message-box clearfix control-group">
+            <label class="control-label" for="inputPassword"><i class="icon-envelope-alt"></i> Message</label>
+            <span class="counter-box">160</span>
+            <div class="input-wrap message-box">
+              <div class="controls input_padding_extra ">
+                <textarea class="input"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="custom-select-wrap input-prepend span12">
+            <span class="add-on "><i class="icon-money"></i> Amount</span>
+            <div class="custom-select-input-wrap">
+              <select  class="amountSelect span12">
+                <option>100</option>
+                <option>200</option>
+                <option>300</option>
+                <option>400</option>
+                <option>500</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn rt" data-dismiss="modal" aria-hidden="true"><i class="icon-double-angle-right"></i></button>
+      <button class="btn btn-primary"><i class="icon-ok"></i> Done</button>
+      <div class="shadow-top-wrap">
+        <div class="shadow-bottom"></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal hide" id="contactPicker" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">
+    <div class="modal-header">
+      <div class="inner">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <div class="contactHeader">
+          <div class="icon">
+            <i class="icon-users"></i>
+          </div>
+          <div class="info">
+            <h3>Pick Contact</h3>
+            <p class="hint">0 selected</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content modal-body">
+      <div class="contactPickerWrap">
+        <div class="contactPickerHeader lightPadded">
+          <form class="search-form row-fluid">
+            <div class="control-group">
+              <div class="controls input_padding_extra ">
+                <a href="#contactPicker" role="button" data-toggle="modal" class="tool-button"><i class="icon-search"></i></a>
+                <input type="password" class="span12" id="inputSearchContact" placeholder="Type a contact name">
+              </div>
+              <div class="shadow-bottom-wrap">
+                <div class="shadow-top"></div>
+              </div>
+            </div>
+          </form></div>
+        <div class="contactContent">
+          <ul class="items contactItems letterPressed">
+            <li>
+              <a>
+                <div class="inner">
+                  <div class="avatar small">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header">User Name</h6>
+                    <p><i class="icon-phone"></i>080994459595</p>
+                  </div>
+
+                  <div class="toolBar">
+                    <input type="checkbox"/>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li>
+              <a>
+                <div class="inner">
+                  <div class="avatar small">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header">User Name</h6>
+                    <p><i class="icon-phone"></i>080994459595</p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn rt" data-dismiss="modal" aria-hidden="true"><i class="icon-double-angle-right"></i></button>
+      <button class="btn btn-primary"><i class="icon-ok"></i> Done</button>
+      <div class="shadow-top-wrap">
+        <div class="shadow-bottom"></div>
+      </div>
+    </div>
+  </div>
+</div>

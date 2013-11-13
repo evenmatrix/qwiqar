@@ -1,6 +1,7 @@
 //= require utils
 //= require jquery.tmpl.min
 //= require spine/spine
+//= require controller/tab
 //= require_self
 
 
@@ -8,7 +9,8 @@ jQuery(function($){
     window.TopUp = Spine.Controller.create({
         elements:{
             "#quickTopUp":"quickTopUpEl",
-            "#groupTopUp":"groupTopUpEl"
+            "#groupTopUp":"groupTopUpEl",
+            '.networkChoice':"networkChoice"
         },
 
         events:{
@@ -18,8 +20,10 @@ jQuery(function($){
         proxied:[],
 
         init: function(){
-            this.quickTopUp=QuickTopUp.init({el:this.quickTopUpEl})
-            this.groupTopUp=GroupTopUp.init({el:this.groupTopUpEl})
+            //this.quickTopUp=QuickTopUp.init({el:this.quickTopUpEl})
+            //this.groupTopUp=GroupTopUp.init({el:this.groupTopUpEl})
+            //this.tabController=TabController.init({el:this.el,options:{activeTabClass:"active",activePanelClass:"active"}})
+            this.networkChoice.selectmenu();
         }
     })
 
@@ -50,6 +54,7 @@ jQuery(function($){
 jQuery(function($){
     window.GroupTopUp = Spine.Controller.create({
         elements:{
+            ".amountSelectGroup":"amountBox"
         },
 
         events:{
@@ -59,7 +64,7 @@ jQuery(function($){
         proxied:[],
 
         init: function(){
-            console.log("groupTopUp")
+            this.amountBox.chosen();
         }
     })
 
@@ -70,7 +75,8 @@ jQuery(function($){
         elements:{
           '#topUp':'topUpEl',
           "#quickTopUp":"quickTopUp",
-          "#groupTopUp":"groupTopUp"
+          "#groupTopUp":"groupTopUp",
+           ".amountSelect":"amountSelect"
         },
 
         events:{
@@ -81,6 +87,7 @@ jQuery(function($){
 
         init: function(){
             this.topUp=TopUp.init({el:this.topUpEl})
+            this.amountSelect.chosen();
             console.log("App")
         }
     })

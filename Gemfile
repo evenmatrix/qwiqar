@@ -20,6 +20,7 @@ group :assets do
   gem 'twitter-bootstrap-rails'
   gem 'less-rails' , :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
+  gem 'hogan_assets'
 end
 
 gem 'jquery-rails'

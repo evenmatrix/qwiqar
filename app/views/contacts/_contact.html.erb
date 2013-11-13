@@ -1,0 +1,11 @@
+<li class="item">
+  <a href="<%= user_contact_url(current_user,contact) %>" class="thumbnail contact zero-radius">
+    <div class="avatar">
+      <%= image_tag  contact.photo.url(:icon) %>
+    </div>
+    <div class="user-info">
+      <h6 class="light-header ui-inline-text"><%= contact.name %></h6>
+      <p><i class="icon-phone"></i><%= contact.phone_number.number %></p>
+    </div>
+  </a>
+</li>

@@ -1,31 +1,18 @@
 <div class="page">
   <div class="row-fluid">
-    <%= render partial: "layouts/side_nav" %>
+    <%= currently_at_side_nav 'Top Up' %>
     <div class="main span8">
       <div id="topUp" class="box">
         <ul class="nav nav-tabs">
           <li class="active">
             <a href="#quickTopUp" data-toggle="tab">Quick Top Up</a>
           </li>
-          <li>
-            <a href="#groupTopUp" data-toggle="tab" >Group Top Up </a>
-          </li>
         </ul>
-        <div class="tab-contentx">
+        <div class="tab-content">
           <div id="quickTopUp" style="display: none;" class="tab-pane">
             <div class="top-btn-container row-fluid">
-              <div class="custom-select-wrap input-prepend span6">
-                <span class="add-on"><i class="icon-mobile"></i> Phone Number </span>
-                <div class="custom-select-input-wrap">
-                  <select id="phoneNumberSelect" class="span12" >
-                    <option class="phone-icon">08055431397 (Work)</option>
-                    <option class="phone-icon">08097530118 (Work)</option>
-                    <option class="phone-icon">08065430389 (Work)</option>
-                  </select>
-                </div>
-              </div>
-              <div class="custom-select-wrap input-prepend rt span6">
-                <span class="add-on ">N Amount</span>
+              <div class="custom-select-wrap input-prepend span8">
+                <span class="add-on "><i class="icon-money"></i> Amount/<i class="icon-user"></i></span>
                 <div class="custom-select-input-wrap">
                   <select id="amountSelect" class="span12">
                     <option>100</option>
@@ -36,21 +23,139 @@
                   </select>
                 </div>
               </div>
-            </div>
-            <div class="button-wrap clearfix">
-              <button class="btn btn-primary">Top Up</button>
+              <div class="span2">
+                <span class="label label-important">Total 50000</span>
+              </div>
+                <div class="span2">
+                <button class="btn btn-block btn-success">Top Up</button>
+              </div>
             </div>
           </div>
-          <div id="groupTopUp" class="tab-pane">
-            <form class="group-topup-form">
-              <div class="control-group">
-                <label class="control-label" for="inputPassword">ADD RECIPIENTS</label>
+          <div id="groupTopUp" style="display: block;" class="tab-pane">
+            <form class="group-topup-form clearfix">
+              <div class="control-group ">
+                <label class="control-label" for="inputPassword"><i class="icon-user-add"></i> Add Contacts</label>
                 <div class="controls input_padding_extra ">
                   <a href="#contactPicker" role="button" data-toggle="modal" class="btn tool-button"><i class="icon-plus"></i></a>
                   <input type="password" class="span12" id="inputPassword" placeholder="Type a contact name">
                 </div>
               </div>
+                <div class="message-box clearfix control-group">
+                <label class="control-label" for="inputPassword"><i class="icon-envelope-alt"></i> Message</label>
+                <span class="counter-box">160</span>
+                <div class="input-wrap message-box">
+                  <div class="controls input_padding_extra ">
+                    <textarea class="input"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="top-btn-container  row-fluid" style="display:none;">
+                <div class="custom-select-wrap input-prepend span6">
+                  <span class="add-on "> Amount/<i class="icon-user"></i></span>
+                  <div class="custom-select-input-wrap">
+                    <select id="amountSelectGroup" class="span12">
+                      <option>100</option>
+                      <option>200</option>
+                      <option>300</option>
+                      <option>400</option>
+                      <option>500</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="span3">
+                  <div class="label total label-info">Total 50000</div>
+                </div>
+                <div class="span3">
+                  <button class="btn btn-block btn-success">Top Up</button>
+                </div>
+              </div>
             </form>
+            <div class="contactContent">
+              <label class="control-label" for="inputPassword"><i class="icon-users"></i> People </label>
+              <button type="button" class=" remove btn  btn-small" ><i class="icon-remove"></i></button>
+                <header>
+                <div class="top-btn-container row-fluid">
+                  <div class="custom-select-wrap input-prepend span6">
+                    <span class="add-on ">select topup</span>
+                    <div class="custom-select-input-wrap">
+                      <select id="amountSelectGroupx" class="amountSelectGroup span12">
+                        <option>100</option>
+                        <option>200</option>
+                        <option>300</option>
+                        <option>400</option>
+                        <option>500</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="span4 block-label ">
+                    <span class="label label-important ui-inline-text"><i class="icon-users"></i> 20 &nbsp;&nbsp;|&nbsp;&nbsp; <i class="icon-money"></i> Pay ₦500,000,000</span>
+                  </div>
+                  <div class="span2">
+                    <button class="btn btn-block btn-success">Top Up</button>
+                  </div>
+                </div>
+
+                <div class="shadow-bottom-wrap">
+                  <div class="shadow-top"></div>
+                </div>
+              </header>
+              <div class="contactListContainer">
+              <ul class="items contactItems letterPressed">
+                <li class="row-fluid">
+                  <a>
+                    <div class="inner">
+                    <div class="user span4">
+                    <div class="avatar">
+                      <%= image_tag "avatar.png" %>
+                    </div>
+                    <div class="user-info">
+                      <h6 class="light-header ui-inline-text">User Name Onyemaechi Okafor</h6>
+                      <p><i class="icon-phone"></i>080994459595</p>
+                    </div>
+                    </div>
+                    <div class="message-block span4">
+                        <p class="ui-inline-text"><i class="icon-envelope-alt"></i> This is the beginning of the very end of time, some things dont change</p>
+                    </div>
+                    <div class="message-block span2">
+                      <p class="ui-inline-text"><i class="icon-money"></i> <strong>$60000</strong></p>
+                    </div>
+                    <div class="toolBar span2">
+                      <button data-toggle="modal" class="btn btn-small" role="button" data-target="#editModal"><i class="icon-edit"></i></button>
+                      <button type="button" class="btn btn-small" ><i class="icon-remove"></i></button>
+                    </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="row-fluid">
+                  <a>
+                    <div class="inner">
+                      <div class="user span4">
+                        <div class="avatar">
+                          <%= image_tag "avatar.png" %>
+                        </div>
+                        <div class="user-info">
+                          <h6 class="light-header ui-inline-text">User Name Onyemaechi Okafor</h6>
+                          <p><i class="icon-phone"></i>080994459595</p>
+                        </div>
+                      </div>
+                      <div class="message-block span4">
+                        <p class="ui-inline-text"><i class="icon-envelope-alt"></i> This is the beginning of the very end of time, some things dont change</p>
+                      </div>
+                      <div class="message-block span2">
+                        <p class="ui-inline-text"><i class="icon-money"></i> <strong>$60000</strong></p>
+                      </div>
+                      <div class="toolBar span2">
+                        <button data-toggle="modal" class="btn btn-small" role="button" data-target="#editModal"><i class="icon-edit"></i></button>
+                        <button type="button" class="btn btn-small" ><i class="icon-remove"></i></button>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+              </div>
+            </div>
         </div>
         </div>
       </div>
@@ -61,18 +166,129 @@
 <% content_for :javascript_contents do %>
     <%= javascript_include_tag "top_up" %>
 <% end %>
-
-<div class="modal hide fade" id="contactPicker" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">
+<div class="modal hide" id="editModal" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3><i class="icon-info"></i> Pick Contact</h3>
-  </div>
-  <div class="modal-body">
-    <div class="contactPicker">
-
+    <div class="contactHeader">
+      <div class="icon">
+        <div class="avatar">
+          <%= image_tag "avatar.png" %>
+        </div>
+      </div>
+      <div class="info indent">
+        <h3>Paul Adeferati</h3>
+        <p class="hint">08099447050</p>
+      </div>
     </div>
+
+  </div>
+  <div class="content modal-body override">
+    <form class="overrideContact wrap">
+      <div class="row-fluid">
+
+        <div class="message-box clearfix control-group">
+          <label class="control-label" for="inputPassword"><i class="icon-envelope-alt"></i> Message</label>
+          <span class="counter-box">160</span>
+          <div class="input-wrap message-box">
+            <div class="controls input_padding_extra ">
+              <textarea class="input"></textarea>
+            </div>
+          </div>
+        </div>
+      <div class="custom-select-wrap input-prepend span12">
+        <span class="add-on "><i class="icon-money"></i> Amount</span>
+        <div class="custom-select-input-wrap">
+          <select  class="amountSelect span12">
+            <option>100</option>
+            <option>200</option>
+            <option>300</option>
+            <option>400</option>
+            <option>500</option>
+          </select>
+        </div>
+      </div>
+      </div>
+
+    </form>
   </div>
   <div class="modal-footer">
-    <button class="btn rt" data-dismiss="modal" aria-hidden="true"><i class="icon-angleright"></i></button>
+    <button class="btn rt" data-dismiss="modal" aria-hidden="true"><i class="icon-double-angle-right"></i></button>
+    <button class="btn btn-primary"><i class="icon-ok"></i> Done</button>
+    <div class="shadow-top-wrap">
+      <div class="shadow-bottom"></div>
+    </div>
   </div>
+</div>
+<div class="modal hide" id="contactPicker" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">
+  <div class="modal-header">
+    <div class="inner">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+     <div class="contactHeader">
+       <div class="icon">
+         <i class="icon-users"></i>
+       </div>
+       <div class="info">
+         <h3>Pick Contact</h3>
+         <p class="hint">0 selected</p>
+       </div>
+     </div>
+      </div>
+  </div>
+  <div class="content modal-body">
+    <div class="contactPickerWrap">
+      <div class="contactPickerHeader lightPadded">
+        <form class="search-form row-fluid">
+          <div class="control-group">
+            <div class="controls input_padding_extra ">
+              <a href="#contactPicker" role="button" data-toggle="modal" class="tool-button"><i class="icon-search"></i></a>
+              <input type="password" class="span12" id="inputSearchContact" placeholder="Type a contact name">
+            </div>
+            <div class="shadow-bottom-wrap">
+              <div class="shadow-top"></div>
+            </div>
+          </div>
+        </form></div>
+      <div class="contactContent">
+      <ul class="items contactItems letterPressed">
+           <li>
+             <a>
+               <div class="inner">
+               <div class="avatar small">
+                 <%= image_tag "avatar.png" %>
+               </div>
+               <div class="user-info">
+                    <h6 class="light-header">User Name</h6>
+                    <p><i class="icon-phone"></i>080994459595</p>
+               </div>
+
+               <div class="toolBar">
+                 <input type="checkbox"/>
+               </div>
+                   </div>
+             </a>
+           </li>
+        <li>
+  <a>
+    <div class="inner">
+    <div class="avatar small">
+      <%= image_tag "avatar.png" %>
+    </div>
+    <div class="user-info">
+      <h6 class="light-header">User Name</h6>
+      <p><i class="icon-phone"></i>080994459595</p>
+    </div>
+        </div>
+  </a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="modal-footer">
+  <button class="btn rt" data-dismiss="modal" aria-hidden="true"><i class="icon-double-angle-right"></i></button>
+  <button class="btn btn-primary"><i class="icon-ok"></i> Done</button>
+  <div class="shadow-top-wrap">
+    <div class="shadow-bottom"></div>
+  </div>
+</div>
 </div>

@@ -1,5 +1,5 @@
 jQuery(function($){
-    window.NewBranch = Spine.Controller.create({
+    window.NewContact = Spine.Controller.create({
         elements:{
            "#name_el":"nameEl",
             "#branch_name":"branchName",
@@ -20,27 +20,8 @@ jQuery(function($){
         proxied: ["render",'activate','deActivate','success','failure'],
         template:function(data){
         },
-        init: function(){
-          this.minChars=this.minChars||1
-          $("#newBranchDialog").bind("branch:new",this.proxy(function(ev,el){
-              console.log("error el",el)
-              this.render(el)
-          }))
-        } ,
         show:function(){
            console.log("show tip branch",this.newBranchForm)
-        },
-        click:function(ev){
-           var target=$(ev.currentTarget)
-            this.btns.removeClass("active") ;
-            target.addClass("active");
-            if(target.hasClass("private")) {
-                this.type.val("true") ;
-            } else{
-                this.type.val("false") ;
-            }
-            this.nameEl.hide().show();
-            console.log(this.type)
         },
         checkAvailability:function(ev){
              query=$(ev.target).val()
@@ -120,14 +101,6 @@ jQuery(function($){
             return false;
         },
         render:function(el){
-          this.newBranchFormContainer.html(el)
-          this.newBranchForm=this.el.find('#new_branch_form')
-          this.nameEl=this.newBranchForm.find("#name_el")
-          this.type=this.newBranchForm.find("#branch_private")
-          this.treeId=this.newBranchForm.find("#branch_tree_id")
-          this.createButton=this.newBranchForm.find(".create")
-          this.cancel=this.newBranchForm.find(".cancel")
-          this.btns=this.newBranchForm.find(".ui-btn")
         },
         success:function(data){
             //console.log(data)

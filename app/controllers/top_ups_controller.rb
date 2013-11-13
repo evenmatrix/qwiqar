@@ -5,7 +5,7 @@ class TopUpsController < ApplicationController
     @top_ups = TopUp.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # wallet.html.erb
       format.json { render json: @top_ups }
     end
   end

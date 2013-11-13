@@ -21,8 +21,12 @@ class UsersController < ApplicationController
   end
 
   def home
+    @user =current_user
   end
 
+  def people
+
+  end
  def change_photo
     logger.info "successful upload..."
     respond_to do |format|
@@ -52,6 +56,8 @@ class UsersController < ApplicationController
       render :text => 'Sorry you are not authorized to do that', :layout => true, :status => 401
     end
   end
+
+
 
   def edit
     @user ||= User.find(params[:id])

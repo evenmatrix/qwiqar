@@ -1,0 +1,3 @@
+(function(){
+    $("#newContactDialog").trigger("contacts:fetch",{contacts:'<%= escape_javascript(render @contacts)%>',params:{page:<%=@data[:params][:page]%>,per_page:<%=@data[:params][:per_page]%>},empty:<%=@data[:empty]%>,remaining:<%=@data[:remaining]%>})
+})()

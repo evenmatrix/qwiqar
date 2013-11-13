@@ -1,0 +1,15 @@
+<div class="btn-group">
+  <button class="btn" type="button" data-dismiss="modal"><i class="icon-remove"></i> close</button>
+  <%- if action == 'show' %>
+
+      <a href="<%= edit_user_contact_url(current_user,@contact)%>" class="btn edit" ><i class="icon-edit"></i> edit</a>
+
+        <%= link_to user_contact_url(current_user,@contact), :confirm => 'Are you sure?', :method => :delete, :remote=>true, :class=>'btn delete' do %>
+          <i class="icon-trash"></i> delete
+      <% end -%>
+
+  <% end -%>
+  <%- if action == 'edit' %>
+      <a href="<%= user_contact_url(current_user,@contact)%>" class="btn back" ><i class="icon-arrow-left"></i> back</a>
+  <% end -%>
+</div>

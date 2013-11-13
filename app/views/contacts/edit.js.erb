@@ -1,0 +1,3 @@
+(function(){
+    $("#newContactDialog").trigger("contacts:edit",{el:'<%= escape_javascript(render :partial => "contacts/edit_form")%>',links:'<%= escape_javascript(currently_at_contact_nav("edit")) %>'})
+})()

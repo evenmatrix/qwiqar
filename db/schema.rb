@@ -11,7 +11,48 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130928054518) do
+ActiveRecord::Schema.define(:version => 20131026095843) do
+
+  create_table "carriers", :force => true do |t|
+    t.string   "name"
+    t.string   "country_code"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "carriers", ["name", "country_code"], :name => "index_carriers_on_name_and_country_code", :unique => true
+
+  create_table "contact_groups", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "about"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
+
+  add_index "contact_groups", ["user_id"], :name => "index_contact_groups_on_user_id"
+
+  create_table "contacts", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "carrier"
+    t.string   "phone_number"
+    t.integer  "user_id"
+    t.integer  "contact_group_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
+
+  add_index "contacts", ["phone_number"], :name => "index_contacts_on_phone_number", :unique => true
+  add_index "contacts", ["user_id"], :name => "index_contacts_on_user_id"
 
   create_table "deposits", :force => true do |t|
     t.decimal  "amount",     :precision => 10, :scale => 0, :default => 0, :null => false
@@ -57,15 +98,16 @@ ActiveRecord::Schema.define(:version => 20130928054518) do
   add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
 
   create_table "phone_numbers", :force => true do |t|
-    t.string   "carrier"
+    t.integer  "carrier_id"
     t.string   "number"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "entity_id"
+    t.string   "entity_type"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
+  add_index "phone_numbers", ["entity_id"], :name => "index_phone_numbers_on_entity_id"
   add_index "phone_numbers", ["number"], :name => "index_phone_numbers_on_number", :unique => true
-  add_index "phone_numbers", ["user_id"], :name => "index_phone_numbers_on_user_id"
 
   create_table "top_ups", :force => true do |t|
     t.decimal  "amount",       :precision => 10, :scale => 0, :default => 0, :null => false

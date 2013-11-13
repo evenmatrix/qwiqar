@@ -5,13 +5,33 @@ Qwiqar::Application.routes.draw do
   as :user do
     match "account/users/sign_out", :to => "devise/sessions#destroy" ,:as=>"user_sign_out"
     match '/user/home', :to => 'users#home',:as=> "user_root"
-
   end
 
   resources :users   do
     member do
       get :profile
+      get :people
     end
+
+    resources :contacts do
+      collection do
+        get :search
+      end
+    end
+
+    resources :top_ups do
+      collection do
+        get :top_up
+      end
+    end
+
+    resources :wallets do
+      collection do
+        get :top_up
+      end
+    end
+
+    resources :contact_groups
   end
 
   resources :feedback_messages ,:only => [:create]

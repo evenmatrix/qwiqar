@@ -1,0 +1,4 @@
+<ul id="contactTabs" class="nav nav-tabs pull-left">
+  <%= people_nav_item("Contacts",user_contacts_url(current_user),current:current_tab,data:{:action=>"show:contacts",:target=>"#allContacts"}) %>
+  <%= people_nav_item("Groups",user_contact_groups_url(current_user),current:current_tab,data:{:action=>"show:groups",:target=>"#groupContacts"}) %>
+</ul>

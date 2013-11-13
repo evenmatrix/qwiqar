@@ -1,0 +1,3 @@
+(function(){
+    $("#newContactDialog").trigger("contacts:show",{el:'<%= escape_javascript(render :partial => "contacts/show")%>',links:'<%= escape_javascript(currently_at_contact_nav("show")) %>',notice:'<%= escape_javascript(render :partial => "contacts/created_notice") %>'})
+ })()

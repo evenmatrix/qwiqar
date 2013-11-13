@@ -5,7 +5,7 @@ class FeedbacksController < ApplicationController
     @feedbacks = Feedback.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # wallet.html.erb
       format.json { render json: @feedbacks }
     end
   end

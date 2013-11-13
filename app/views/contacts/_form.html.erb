@@ -1,0 +1,25 @@
+<div class="control-group">
+  <%=f.label :first_name,:class=>"control-label",:required =>false%>
+  <%= f.input :first_name,:label =>false, :wrapper_html => { :class => 'controls input_padding_extra' },:input_html => {:class=>"span10"}, :error_html => { :class => 'password_error'} %>
+</div>
+
+<div class="control-group">
+  <%=f.label :last_name,:class=>"control-label",:required =>false%>
+  <%= f.input :last_name, :label =>false,:wrapper_html => { :class => 'controls input_padding_extra' },:input_html => {:class=>"span10"} %>
+</div>
+
+<%= f.fields_for :phone_number do|builder|   %>
+    <div class="control-group">
+      <%=builder.label :carrier,:class=>"control-label",:required =>false%>
+      <%=builder.association :carrier, :collection => Carrier.all(:order => 'name'), :prompt => "Choose a Carrier",:label =>false,:wrapper_html => { :class => 'controls input_padding_extra' },:input_html => {:data=>{"class"=>"span10"},:class=>"xselect span10"} %>
+    </div>
+    <div class="control-group">
+      <%=builder.label :number,:class=>"control-label",:required =>false%>
+      <%= builder.input :number, :label =>false,:wrapper_html => { :class => 'controls input_padding_extra' },:input_html => {:class=>"span10"} %>
+    </div>
+<% end %>
+
+<div class="control-group">
+  <%=f.label :photo,:class=>"control-label",:required =>false%>
+  <%= f.input :photo,:as=>:file, :label =>false,:wrapper_html => { :class => 'controls input_padding_extra' },:input_html => {:data=>{"class"=>"span10"},:class=>"xfile span10"} %>
+</div>

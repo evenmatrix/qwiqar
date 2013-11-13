@@ -45,6 +45,7 @@
     <orderEntry type="library" scope="PROVIDED" name="ffi (v1.8.1, rbenv: 2.0.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="highline (v1.6.18, rbenv: 2.0.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="hike (v1.2.3, rbenv: 2.0.0-p0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="hogan_assets (v1.6.0, rbenv: 2.0.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="hpricot (v0.8.6, rbenv: 2.0.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v0.6.1, rbenv: 2.0.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jbuilder (v1.4.1, rbenv: 2.0.0-p0) [gem]" level="application" />

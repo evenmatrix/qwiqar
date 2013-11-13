@@ -54,9 +54,9 @@ $.fn.customFileInput = function(){
 				fileInput.trigger('checkChange');
 			},100);
 		});
-		
+	var klass=fileInput.data("class");
 	//create custom control container
-	var upload = $('<div class="customfile"></div>');
+	var upload = $('<div class="customfile"></div>').addClass(klass);
 	//create custom control button
 	var uploadButton = $('<span class="customfile-button btn" aria-hidden="true">Browse</span>').appendTo(upload);
 	//create custom control feedback

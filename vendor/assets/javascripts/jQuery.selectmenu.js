@@ -45,14 +45,15 @@ $.fn.selectmenu = function(settings){
 		var buttonID = selectElement.attr('id') + '-button';
 		var menuID = selectElement.attr('id') + '-menu';
 
-		//create empty menu button 
-		var button = $('<a class="custom-select" id="'+ selectElementId +'-button" role="button" href="#" aria-haspopup="true" aria-owns="'+ selectElementId +'-menu"></a>');
-		
+
+		var klass=selectElement.data("class");
+        //create empty menu button
+        var button = $('<a class="custom-select" id="'+ selectElementId +'-button" role="button" href="#" aria-haspopup="true" aria-owns="'+ selectElementId +'-menu"></a>').addClass(klass);
 		//menu icon			
 		var selectmenuStatus = $('<span class="custom-select-status">'+ selectedOptionText +'</span>').appendTo(button);
 		var selectmenuIcon = $('<span class="custom-select-button-icon"></span>').appendTo(button);
 		var roleText = $('<span class="custom-select-roletext"> select</span>').appendTo(button);
-		
+        var clearfix=$('<div class="clearfix"></div>').appendTo(button);
 		//add selected option class
 		button.addClass(selectedOptionClass);
 		
@@ -101,6 +102,7 @@ $.fn.selectmenu = function(settings){
 		if(menu.outerHeight() > o.maxHeight){
 			menu.height(o.maxHeight);
 		}
+        menu.width(selectElement.outerWidth())
 			
 		//hide menu
 		menu.addClass('custom-select-menu-hidden');	

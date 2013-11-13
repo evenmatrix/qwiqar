@@ -13,10 +13,18 @@ class User < ActiveRecord::Base
 
   has_many :sent_top_ups,:foreign_key => "sender_id",:class_name => "TopUp"
   has_many :received_top_ups,:foreign_key => "recipient_id",:class_name => "TopUp"
-
-  has_many :phone_numbers ,:dependent=>:destroy
+  has_many :contacts ,:dependent=>:destroy
+  has_many :phone_numbers ,:dependent=>:destroy, :as=>:entity
+  has_one :wallet ,:dependent=>:destroy
 
   def user_name
     "#{self.first_name}##{self.last_name}#{self.id}"
+  end
+
+  after_create :create_wallet
+
+  def create_wallet
+     self.wallet= Wallet.new
+     save
   end
 end

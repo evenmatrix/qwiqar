@@ -1,32 +1,29 @@
 <aside id ="sideNav" class="span4">
   <div class="box">
-    <div class="user-info">
+    <div  class="infoBox">
       <div class="avatar">
         <%= image_tag "avatar.png" %>
       </div>
-      <div class="detail">
-        <div class="name elp">
-          <h4 class="ui-inline-text">Paul Aden Smith alonso</h4>
+      <div class="user-info">
+        <div class="detail">
+          <div class="name elp">
+            <h4 class="light-header ui-inline-text">Paul Aden Smith alonso</h4>
+          </div>
+
+           <span class="account-label label label-success"><i class="icon-money"></i>  ₦60,000</span>
         </div>
       </div>
-    </div>
-    <div class="clearfix divider-horizontal"></div>
-    <div class="btns">
-      <a class="btn">
-        <i class="icon-edit"></i>
-      </a>
-      <span class="account-label label label-success">$60,000</span>
+      <div class="clearfix"></div>
     </div>
   </div>
 
   <div class="box box-lead">
     <ul class="nav nav-list">
-      <li class="active"><a href="#"><i class="icon-mobile"></i> Top Up</a></li>
-      <li><a href="#"><i class="icon-vcard"></i> Profile</a></li>
-      <li><a href="#"><i class="icon-diary"></i> Wallet</a></li>
-      <li><a href="#"><i class="icon-users"></i> People</a></li>
-      <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
-      <li><a href="#"><i class="icon-history"></i> History</a></li>
+      <%= nav_tab("Quick Top Up",user_top_ups_url(current_user), current:current_tab,icon:{:class=>"icon-mobile"}) %>
+      <%= nav_tab("Profile",profile_user_url(current_user), current:current_tab,icon:{:class=>"icon-vcard"}) %>
+      <%= nav_tab("Wallet",user_wallet_url(current_user,current_user.wallet), current:current_tab,icon:{:class=>"icon-diary"}) %>
+      <%= nav_tab("People",people_user_url(current_user), current:current_tab,icon:{:class=>"icon-users"}) %>
+      <%= nav_tab("History",root_url, current:current_tab,icon:{:class=>"icon-history"}) %>
     </ul>
   </div>
 </aside>

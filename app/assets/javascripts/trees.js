@@ -2,7 +2,7 @@
 //= require jquery.upload
 //= require jquery.tmpl.min
 //= require spine/spine
-//= require model/branch_item
+//= require model/contact
 //= require controller/browser
 //= require controller/new_branch
 //= require_self
