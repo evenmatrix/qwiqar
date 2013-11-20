@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
   def index
+  end
+
+  def all
+
     if current_user.admin?
       @page=(params[:page]||1).to_i
       @per_page  = (params[:per_page] || 20).to_i

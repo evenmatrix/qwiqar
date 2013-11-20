@@ -1,0 +1,514 @@
+<div class="page">
+  <div class="row-fluid">
+    <%= currently_at_side_nav 'Users' %>
+    <div class="main span8">
+      <div id="people" class="box">
+        <%= currently_at_people_nav 'Contacts' %>
+        <div class="tab-content">
+          <div id="allContacts" class="tab-pane">
+            <div class="search-container">
+              <form class="search-form row-fluid">
+                <div class="control-group">
+                  <div class="controls input_padding_extra ">
+                    <a  role="button" data-toggle="modal" class="tool-button"><i class="icon-search"></i></a>
+                    <input type="text" class="span12"  placeholder="Type a contact name">
+                    <div class="tool-buttons">
+                      <a href="#newContactModal" role="button" data-toggle="modal" class="btn btn-right zero-radius"><i class="icon-plus"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <ul class="thumbnails items">
+              <li class="item">
+                <a href="#contactModal" data-toggle="modal" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">User Name Onyemaechi Okafor Peter Sised fjfjf</h6>
+                    <p><i class="icon-phone"></i>080994459595</p>
+                  </div>
+                </a>
+              </li>
+              <li class="item">
+                <a href="#" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Onyemaechi Okafor</h6>
+                    <p><i class="icon-phone"></i>080994459595</p>
+                  </div>
+                </a>
+              </li>
+              <li class="item">
+                <a href="#" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Peter Sise</h6>
+                    <p><i class="icon-phone"></i>080994459595</p>
+                  </div>
+                </a>
+              </li>
+              <li class="item">
+                <a href="#" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Paul Smith</h6>
+                    <p><i class="icon-phone"></i>080994459595</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div id="groupContacts" class="tab-pane">
+            <div class="search-container">
+              <form class="search-form row-fluid">
+                <div class="control-group">
+                  <div class="controls input_padding_extra ">
+                    <a  role="button" data-toggle="modal" class="tool-button"><i class="icon-search"></i></a>
+                    <input type="text" class="span12"  placeholder="Type a contact name">
+                    <div class="tool-buttons">
+                      <a href="#groupModal" role="button" data-toggle="modal" class="btn btn-right zero-radius"><i class="icon-plus"></i> new group</a>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <ul class="thumbnails items">
+              <li class="item">
+                <a href="#contactModal" data-toggle="modal" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Onyemaechi Okafor </h6>
+                    <p><i class="icon-users"></i><span class="label label-success">20</span> members</p>
+                  </div>
+                </a>
+              </li>
+              <li class="item">
+                <a href="#" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Onyemaechi Okafor</h6>
+                    <p><i class="icon-users"></i><span class="label label-success">20</span> members</p>
+                  </div>
+                </a>
+              </li>
+              <li class="item">
+                <a href="#" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Peter Sise</h6>
+                    <p><i class="icon-users"></i><span class="label label-success">20</span> members</p>
+                  </div>
+                </a>
+              </li>
+              <li class="item">
+                <a href="#" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Paul Smith</h6>
+                    <p><i class="icon-users"></i><span class="label label-success">20</span> members</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :javascript_contents do %>
+    <%= javascript_include_tag "people" %>
+<% end %>
+
+<div class="modal hide" id="groupModal" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">
+  <div class="modal-header">
+    <div class="inner">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <div class="contactHeader">
+        <div class="icon">
+          <i class="icon-users"></i>
+        </div>
+        <div class="info indent">
+          <h3>New Group</h3>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="content modal-body override">
+    <form class="overrideContact wrap">
+      <div class="row-fluid">
+        <div class="control-group">
+          <div class="controls input_padding_extra ">
+            <label class="control-label" for="inputEmail">Name</label>
+            <input type="password" class="span12" id="inputSearchContact" placeholder="Type a contact name">
+          </div>
+        </div>
+        <div class="dropBox">
+          <div class="inner">
+            <a id="pick" class="upload_btn  photo_chooser" >
+              <span class="ui-btn-inner">
+              <span class="ui-icon"><i class="icon-picture"></i></span>
+                <span class="ui-text">Pick a photo or drag photo here</span>
+              </span>
+            </a>
+          </div>
+          <div class="photo-upload-progress">
+            <span class="help-inline"><i class="icon-picture"></i> <span class="status">uploading 40%</span></span>
+            <div class="progress progress-success progress-striped active">
+              <div class="bar" style="width:40%"></div>
+            </div>
+          </div>
+          <div class="photo-upload-error">
+            <div class="alert alert-error">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <i class="icon-warning-sign"></i> <strong> Error occurred!</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn rt" data-dismiss="modal" aria-hidden="true"><i class="icon-double-angle-right"></i></button>
+    <button class="btn btn-primary"><i class="icon-ok"></i> Done</button>
+    <div class="shadow-top-wrap">
+      <div class="shadow-bottom"></div>
+    </div>
+  </div>
+</div>
+<div class="modal hide" id="contactModal" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">
+  <div class="modal-header">
+    <div class="inner">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <div class="contactHeader">
+        <div class="icon">
+          <div class="avatar">
+            <%= image_tag "avatar.png" %>
+          </div>
+        </div>
+        <div class="info indent">
+          <h3>Paul Adeferati</h3>
+          <p class="hint">08099447050</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content modal-body override">
+    <form class="overrideContact wrap">
+      <div class="row-fluid">
+
+        <div class="message-box clearfix control-group">
+          <label class="control-label" for="inputPassword"><i class="icon-envelope-alt"></i> Message</label>
+          <span class="counter-box">160</span>
+          <div class="input-wrap message-box">
+            <div class="controls input_padding_extra ">
+              <textarea class="input"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="custom-select-wrap input-prepend span12">
+          <span class="add-on "><i class="icon-money"></i> Amount</span>
+          <div class="custom-select-input-wrap">
+            <select  class="amountSelect span12">
+              <option>100</option>
+              <option>200</option>
+              <option>300</option>
+              <option>400</option>
+              <option>500</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn rt" data-dismiss="modal" aria-hidden="true"><i class="icon-double-angle-right"></i></button>
+    <button class="btn btn-primary"><i class="icon-ok"></i> Done</button>
+    <div class="shadow-top-wrap">
+      <div class="shadow-bottom"></div>
+    </div>
+  </div>
+</div>
+<div class="modal hide" id="newContactModal" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">
+  <div class="modal-header">
+    <div class="inner">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <div class="contactHeader">
+        <div class="icon">
+          <i class="icon-user-add"></i>
+        </div>
+        <div class="info">
+          <h3>Create Contacts</h3>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="content modal-body">
+    <form class="form-horizontal">
+
+      <div class="row-fluid">
+
+        <div class="control-group">
+          <label class="control-label" for="inputEmail">First Name</label>
+          <div class="controls input_padding_extra">
+            <input type="text" id="inputEmail" class="span10" placeholder="Email">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="inputEmail">Last Name</label>
+          <div class="controls input_padding_extra">
+            <input type="text" id="inputEmail" class="span10" placeholder="Email">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputPassword">Phone Number</label>
+          <div class="controls input_padding_extra">
+            <input type="password" id="inputPassword" class="span10" placeholder="Password">
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="inputPassword">Photo</label>
+          <div class="controls input_padding_extra">
+            <input type="file" class="xfile" data-class="span10" placeholder="Password">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn rt" data-dismiss="modal" aria-hidden="true"><i class="icon-double-angle-right"></i></button>
+    <button class="btn btn-primary"><i class="icon-ok"></i> Done</button>
+    <div class="shadow-top-wrap">
+      <div class="shadow-bottom"></div>
+    </div>
+  </div>
+</div>
+<div class="modal hide" id="contactPicker" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">
+  <div class="modal-header">
+    <div class="inner">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <div class="contactHeader">
+        <div class="icon">
+          <i class="icon-search"></i>
+        </div>
+        <div class="info">
+          <h3>Find Contacts</h3>
+          <div><button type="button" data-toggle="modal" data-target="#inviteModal" class="btn-metro btn btn-success"><i class="icon-plus"></i> Invite People</button></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="content modal-body">
+    <div class="contactPickerWrap">
+      <div class="contactPickerHeader">
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a href="#all" data-toggle="tab">Everyone</a>
+          </li>
+          <li>
+            <a href="#groupTopUp" data-toggle="tab" >Facebook</a>
+          </li>
+          <li>
+            <a href="#groupTopUp" data-toggle="tab" >Phone Contacts</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tab-content">
+        <div id="#all">
+          <div class="search-container">
+            <form class="search-form row-fluid">
+              <div class="control-group">
+                <div class="controls input_padding_extra ">
+                  <a  role="button" data-toggle="modal" class="tool-button"><i class="icon-search"></i></a>
+                  <input type="password" class="span12" id="inputSearchContact" placeholder="Type a contact name">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="contactContent padded">
+            <ul class="thumbnails items">
+              <li class="item">
+                <a href="#contactModal" data-toggle="modal" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Paul Smith</h6>
+                    <p><button type="button" class="zero-radius btn "><i class="icon-plus"></i> Add to Contacts</button></p>
+                  </div>
+                </a>
+              </li>
+              <li class="item">
+                <a href="#" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Onyemaechi Okafor</h6>
+                    <p><button type="button" class="zero-radius btn "><i class="icon-plus"></i> Add to Contacts</button></p>
+                  </div>
+                </a>
+              </li>
+              <li class="item">
+                <a href="#" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Peter Sise</h6>
+                    <p><button type="button" class="zero-radius btn "><i class="icon-plus"></i> Add to Contacts</button></p>
+                  </div>
+                </a>
+              </li>
+              <li class="item">
+                <a href="#" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Paul Smith</h6>
+                    <p><button type="button" class="zero-radius btn "><i class="icon-plus"></i> Add to Contacts</button></p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn rt" data-dismiss="modal" aria-hidden="true"><i class="icon-double-angle-right"></i></button>
+    <button class="btn btn-primary"><i class="icon-ok"></i> Done</button>
+    <div class="shadow-top-wrap">
+      <div class="shadow-bottom"></div>
+    </div>
+  </div>
+</div>
+<div class="modal hide" id="inviteModal" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">
+  <div class="modal-header">
+    <div class="inner">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <div class="contactHeader">
+        <div class="icon">
+          <i class="icon-user-add"></i>
+        </div>
+        <div class="info">
+          <h4>Invite People</h4>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="content modal-body">
+    <div class="contactPickerWrap">
+      <div class="contactPickerHeader">
+        <ul class="nav nav-tabs">
+          <li class="active">
+            <a href="#all" data-toggle="tab"><i class="icon-facebook"></i> Facebook</a>
+          </li>
+          <li>
+            <a href="#groupTopUp" data-toggle="tab" ><i class="icon-gmail"></i> Gmail</a>
+          </li>
+          <li>
+            <a href="#groupTopUp" data-toggle="tab" ><i class="icon-yahoo"></i> Yahoo</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tab-content">
+        <div id="#all">
+          <div class="search-container">
+            <form class="search-form row-fluid">
+              <div class="control-group">
+                <div class="controls input_padding_extra ">
+                  <a  role="button" data-toggle="modal" class="tool-button"><i class="icon-search"></i></a>
+                  <input type="password" class="span12" id="inputSearchContact" placeholder="Type a contact name">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="contactContent padded">
+            <ul class="thumbnails items">
+              <li class="item">
+                <a href="#contactModal" data-toggle="modal" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Paul Smith</h6>
+                    <p><button type="button" class="zero-radius btn ">invite</button></p>
+                  </div>
+                </a>
+              </li>
+              <li class="item">
+                <a href="#" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Onyemaechi Okafor</h6>
+                    <p><button type="button" class="zero-radius btn ">invite</button></p>
+                  </div>
+                </a>
+              </li>
+              <li class="item">
+                <a href="#" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Peter Sise</h6>
+                    <p><button type="button" class="zero-radius btn ">invite</button></p>
+                  </div>
+                </a>
+              </li>
+              <li class="item">
+                <a href="#" class="thumbnail zero-radius">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Paul Smith</h6>
+                    <p><button type="button" class="zero-radius btn ">invite</button></p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn rt" data-dismiss="modal" aria-hidden="true"><i class="icon-double-angle-right"></i></button>
+    <button class="btn btn-primary"><i class="icon-ok"></i> Done</button>
+    <div class="shadow-top-wrap">
+      <div class="shadow-bottom"></div>
+    </div>
+  </div>
+</div>

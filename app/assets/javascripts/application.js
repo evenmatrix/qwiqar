@@ -24,6 +24,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.slider
 //= require utils
 //= require twitter/bootstrap
 //= require jQuery.fileinput

@@ -1,44 +1,8 @@
 <div class="page">
 <div class="row-fluid">
-  <%= currently_at_side_nav 'Wallet' %>
+  <%= currently_at_side_nav 'Order History' %>
   <div class="main span8">
-    <div id="wallet" class="">
-      <div class="box">
-          <form id="wallet-form" style="display: none;" class="form-horizontal letterPressed">
-            <header class="box-header">
-              <h3 class="light-header"><i class="icon-diary"></i> Wallet
-                <span class="label account-label label-success pull-right"> <i class="icon-money"></i> 50000 credits</span>
-              </h3>
-              <div class="badgex">
-                    <span class="offer-class label label-success">Starter</span>
-                    <p class="offer">3%</p>
-                    <p class="offer-label">discount</p>
-              </div>
-            </header>
-            <div class="control-group">
-              <label class="control-label" for="inputPassword"><i class="icon-money"></i> Credit Units (₦)</label>
-              <div class="controls controls-row slider-input">
-                  <input type="number" name="price" id="slider-range-min" class="span3" klass="span8" value="10000" min="5000" max="100000" step="5000" data-units="naira" />
-              </div>
-            </div>
-              <div class="control-group">
-                <label class="control-label" for="inputPassword"><i class="icon-credit-card"></i> Payment Method</label>
-                <div class="controls controls-row input_padding_extra">
-                <select class="selectMenu" data-class="span8" placeholder="carrier">
-                  <option value="1">Master Card</option>
-                  <option value="3">Visa Card</option>
-                  <option value="2">Verve</option>
-                </select>
-                </div>
-              </div>
-            <div class="control-group">
-              <div class="controls controls-row input_padding_extra ">
-                <button class="btn btn-warning btn-large pay" type="button" data-toggle="modal" data-target="#editModal"  >You Pay:0</button>
-              </div>
-            </div>
-          </form>
-        </div>
-
+    <div id="orders" class="">
       <div id="history">
         <div class="tableContent">
           <header class="letterPressed clearfix">
@@ -58,6 +22,9 @@
                       <div class="dropdown-menu">
                         <li class="">
                           <a tabindex="-1" href="#">Date</a>
+                        </li>
+                        <li class="">
+                          <a tabindex="-1" href="#">Payment Gateway</a>
                         </li>
                         <li class="">
                           <a tabindex="-1" href="#">Status</a>
@@ -109,52 +76,22 @@
               <thead>
               <tr>
                 <th>Order No</th>
-                <th>Credit</th>
-                <th>Amount Billed</th>
+                <th>Item</th>
+                <th>Amount</th>
+                <th>Gross Amount</th>
                 <th>Date</th>
                 <th>Status</th>
+                <th>Payment Gateway</th>
                 <th>Details</th>
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>
-                  <div class="inner">
-                    1234567
-                  </div>
-                </td>
-                <td>
-                  <div class="inner">
-                    ₦10000
-                  </div>
-                </td>
-                <td>
-                  <div class="inner">
-                    ₦9700.00
-                  </div>
-                </td>
-                <td>
-                  <div class="inner">
-                    12/2/1989
-                  </div>
-                </td>
-                <td>
-                  <div class="inner">
-                    <span class="label label-success"><i class="fa fa-flag"></i> success </span>
-                  </div>
-                </td>
-                <td>
-                  <div class="inner">
-                    <a class="btn" role="button"> details</a>
-                  </div>
-                </td>
-              </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      </div>
+    </div>
   </div>
 </div>
 

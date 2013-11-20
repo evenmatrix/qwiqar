@@ -34,6 +34,9 @@ Qwiqar::Application.routes.draw do
     resources :contact_groups
   end
 
+
+  resources :orders
+
   resources :feedback_messages ,:only => [:create]
 
   get "home/index"
