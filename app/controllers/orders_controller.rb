@@ -69,15 +69,62 @@ class OrdersController < ApplicationController
     end
   end
 
-  # DELETE /orders/1
-  # DELETE /orders/1.json
-  def destroy
-    @order = Order.find(params[:id])
-    @order.destroy
 
-    respond_to do |format|
-      format.html { redirect_to orders_url }
-      format.json { head :no_content }
+  def cancel
+    @order = Order.find(params[:id])
+    if @order && current_user=@order.user
+      @order.cancel
+      respond_to do |format|
+        format.html { redirect_to user_root_url }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to user_root_url, alert: 'Unauthorized' }
+        format.json {render :json => {:error=>"not found"},:status => 404}
+      end
     end
   end
+
+  def confirm
+    @order = Order.find(params[:id])
+    if @order && current_user=@order.user
+      @order.confirm
+      respond_to do |format|
+        format.html { redirect_to user_root_url}
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to user_root_url, alert: 'Unauthorized' }
+        format.json {render :json => {:error=>"not found"},:status => 404}
+      end
+    end
+  end
+
+
+  def destroy
+    @order = Order.find(params[:id])
+    if @order && @order.user==current_user
+      if @order.pending?
+        @order.cancel
+        @order.destroy
+        respond_to do |format|
+          format.html { redirect_to user_orders_path(current_user) }
+          format.json { head :no_content }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to @order, alert: "This order cannot be canceled" }
+          format.json { head :no_content }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @order, alert: "Unauthorized" }
+        format.json { head :no_content }
+      end
+    end
+  end
+
 end

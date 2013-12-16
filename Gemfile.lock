@@ -28,6 +28,7 @@ GEM
     activesupport (3.2.13)
       i18n (= 0.6.1)
       multi_json (~> 1.0)
+    ansi (1.4.3)
     arel (3.0.2)
     attr_encrypted (1.2.1)
       encryptor (>= 1.1.1)
@@ -70,6 +71,7 @@ GEM
       actionmailer (>= 3.0.4)
     execjs (2.0.1)
     ffi (1.8.1)
+    hashr (0.0.22)
     highline (1.6.18)
     hike (1.2.3)
     hogan_assets (1.6.0)
@@ -117,6 +119,10 @@ GEM
       cocaine (~> 0.5.0)
       mime-types
     pg (0.15.1)
+    pg_search (0.7.2)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     polyglot (0.3.3)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
@@ -160,6 +166,9 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    searchkick (0.3.4)
+      tire
+      tire-contrib
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -176,6 +185,16 @@ GEM
       ref
     thor (0.18.1)
     tilt (1.4.1)
+    tire (0.6.1)
+      activemodel (>= 3.0)
+      activesupport
+      ansi
+      hashr (~> 0.0.19)
+      multi_json (~> 1.3)
+      rake
+      rest-client (~> 1.6)
+    tire-contrib (0.1.3)
+      tire
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -220,11 +239,13 @@ DEPENDENCIES
   less-rails
   paperclip
   pg
+  pg_search
   quiet_assets
   rails (= 3.2.13)
   rest-client
   roo
   sass-rails (~> 3.2.3)
+  searchkick
   simple_form
   state_machine
   therubyracer

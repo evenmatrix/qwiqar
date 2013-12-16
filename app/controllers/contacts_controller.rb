@@ -4,11 +4,27 @@ class ContactsController < ApplicationController
     @user = User.find(params[:user_id])
     if @user
     query=params[:q]
-    @results = @user.contacts.where("first_name LIKE ? OR last_name LIKE ?", "%#{query}%","%#{query}%").order(:first_name).order(:last_name)
+    @results = Contact.text_search(query)#.order(:first_name).order(:last_name)
     respond_to do |format|
       format.json
       format.js
     end
+    else
+      respond_to do |format|
+        format.json {render :json => {:error=>"not found"},:status => 404}
+      end
+    end
+  end
+
+  def autocomplete
+    @user = User.find(params[:user_id])
+    if @user
+      query=params[:q]
+      @results = Contact.search(query,autocomplete:true,limit:10)
+      respond_to do |format|
+        format.json
+        format.js
+      end
     else
       respond_to do |format|
         format.json {render :json => {:error=>"not found"},:status => 404}
@@ -32,6 +48,7 @@ class ContactsController < ApplicationController
       respond_to do |format|
         format.json
         format.js
+        format.json
       end
     else
       respond_to do |format|

@@ -48,6 +48,4 @@ $(document).ready(
          });  **/
         ;
         $('.xfile').customFileInput();
-        $('.payment').selectmenu();
-        $(".amountSelect").chosen();
     });

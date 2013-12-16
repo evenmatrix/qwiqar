@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131026095843) do
+ActiveRecord::Schema.define(:version => 20131215115648) do
 
   create_table "carriers", :force => true do |t|
     t.string   "name"
@@ -54,11 +54,15 @@ ActiveRecord::Schema.define(:version => 20131026095843) do
   add_index "contacts", ["phone_number"], :name => "index_contacts_on_phone_number", :unique => true
   add_index "contacts", ["user_id"], :name => "index_contacts_on_user_id"
 
+  create_table "credits", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "deposits", :force => true do |t|
-    t.decimal  "amount",     :precision => 10, :scale => 0, :default => 0, :null => false
     t.integer  "wallet_id"
-    t.datetime "created_at",                                               :null => false
-    t.datetime "updated_at",                                               :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "deposits", ["wallet_id"], :name => "index_deposits_on_wallet_id"
@@ -72,30 +76,39 @@ ActiveRecord::Schema.define(:version => 20131026095843) do
     t.datetime "updated_at",                 :null => false
   end
 
-  create_table "line_items", :force => true do |t|
-    t.string   "name"
-    t.decimal  "amount",      :precision => 10, :scale => 0, :default => 0, :null => false
-    t.string   "description"
+  create_table "items", :force => true do |t|
+    t.decimal  "amount",        :precision => 10, :scale => 0, :default => 0, :null => false
     t.integer  "order_id"
-    t.integer  "item_id"
-    t.string   "item_type"
-    t.datetime "created_at",                                                :null => false
-    t.datetime "updated_at",                                                :null => false
+    t.integer  "itemable_id"
+    t.string   "itemable_type"
+    t.datetime "created_at",                                                  :null => false
+    t.datetime "updated_at",                                                  :null => false
   end
 
-  add_index "line_items", ["item_id"], :name => "index_line_items_on_item_id"
-  add_index "line_items", ["item_type"], :name => "index_line_items_on_item_type"
-  add_index "line_items", ["order_id"], :name => "index_line_items_on_order_id"
+  add_index "items", ["itemable_id"], :name => "index_items_on_itemable_id"
+  add_index "items", ["itemable_type"], :name => "index_items_on_itemable_type"
+  add_index "items", ["order_id"], :name => "index_items_on_order_id"
 
   create_table "orders", :force => true do |t|
-    t.decimal  "total_amount", :precision => 10, :scale => 0, :default => 0, :null => false
     t.integer  "user_id"
+    t.integer  "payment_processor_id"
     t.string   "state"
-    t.datetime "created_at",                                                 :null => false
-    t.datetime "updated_at",                                                 :null => false
+    t.integer  "transaction_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
+  add_index "orders", ["payment_processor_id"], :name => "index_orders_on_payment_processor_id"
+  add_index "orders", ["transaction_id"], :name => "index_orders_on_transaction_id", :unique => true
   add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
+
+  create_table "payment_processors", :force => true do |t|
+    t.string   "name"
+    t.string   "gateway_interface"
+    t.text     "description"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "phone_numbers", :force => true do |t|
     t.integer  "carrier_id"
@@ -109,17 +122,35 @@ ActiveRecord::Schema.define(:version => 20131026095843) do
   add_index "phone_numbers", ["entity_id"], :name => "index_phone_numbers_on_entity_id"
   add_index "phone_numbers", ["number"], :name => "index_phone_numbers_on_number", :unique => true
 
-  create_table "top_ups", :force => true do |t|
-    t.decimal  "amount",       :precision => 10, :scale => 0, :default => 0, :null => false
-    t.string   "message"
-    t.integer  "sender_id"
-    t.integer  "recipient_id"
-    t.datetime "created_at",                                                 :null => false
-    t.datetime "updated_at",                                                 :null => false
+  create_table "requisitions", :force => true do |t|
+    t.decimal  "amount",     :precision => 10, :scale => 0, :default => 0, :null => false
+    t.integer  "vault_id"
+    t.integer  "top_up_id"
+    t.string   "state"
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
   end
 
-  add_index "top_ups", ["recipient_id"], :name => "index_top_ups_on_recipient_id"
+  create_table "top_ups", :force => true do |t|
+    t.string   "message"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.integer  "phone_number_id"
+    t.integer  "contact_id"
+    t.boolean  "delivered"
+    t.string   "type"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.string   "top_genie_order_id"
+    t.string   "top_genie_order_status"
+    t.string   "top_genie_order_status_description"
+  end
+
+  add_index "top_ups", ["contact_id"], :name => "index_top_ups_on_contact_id"
+  add_index "top_ups", ["phone_number_id"], :name => "index_top_ups_on_phone_number_id"
+  add_index "top_ups", ["receiver_id"], :name => "index_top_ups_on_receiver_id"
   add_index "top_ups", ["sender_id"], :name => "index_top_ups_on_sender_id"
+  add_index "top_ups", ["top_genie_order_id"], :name => "index_top_ups_on_top_genie_order_id"
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
@@ -144,6 +175,13 @@ ActiveRecord::Schema.define(:version => 20131026095843) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "vaults", :force => true do |t|
+    t.string   "name"
+    t.decimal  "balance",    :precision => 10, :scale => 0, :default => 0, :null => false
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
+  end
 
   create_table "wallets", :force => true do |t|
     t.integer  "user_id"

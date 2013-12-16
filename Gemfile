@@ -60,3 +60,10 @@ gem 'capistrano'
 
 gem 'quiet_assets', :group => :development
 gem "will_paginate", "~> 3.0"
+
+
+
+# gem 'texticle', require: 'texticle/rails'
+
+gem 'pg_search'
+gem 'searchkick'

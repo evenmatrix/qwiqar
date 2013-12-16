@@ -29,9 +29,15 @@ $.fn.peSlider = function(settings){
                 step:parseFloat(input.attr('step'))
 			});
 			var klass=input.attr('klass');
+            if(klass){
+                var sliderWrap = $('<div class="slider-wrap"></div>').addClass(klass);
+                sliderWrap.append(slider)
+                sliderWrap.insertBefore(input)
+            } else{
+                slider.insertBefore(input)
+            }
 			slider
-				.insertBefore(input)
-				.slider(sliderOptions)
+                .slider(sliderOptions)
 				.bind('slide', function(e, ui){ 
 					input.val(ui.value); 
 					friendlyVal = input.val() + ' ' + thisUnits;
@@ -42,7 +48,6 @@ $.fn.peSlider = function(settings){
 					});
                     input.trigger("change")
 				})
-                .addClass(klass)
 				.find('a')
 				.attr({
 					'role': 'slider',
@@ -59,13 +64,15 @@ $.fn.peSlider = function(settings){
 					var inVal = parseFloat(input.val());
 					if( !isNaN(inVal) ){ 
 						slider.slider('value', inVal); 
-						input.val(slider.slider('value')); 
+						input.val(slider.slider('value'));
+                        input.trigger("change")
 					}				
 				})
 				.blur(function(){
 					var inVal = parseFloat(input.val());
 					if( isNaN(inVal) ){ 
 						input.val(0);
+                        input.trigger("change")
 					}				
 				});
 			
@@ -83,7 +90,7 @@ $.fn.peSlider = function(settings){
 				max: select.find('option').length-1,
 				value: select[0].selectedIndex	
 			});
-			
+
 			slider
 				.insertBefore(select)
 				.slider(sliderOptions)

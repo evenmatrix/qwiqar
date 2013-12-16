@@ -3,23 +3,63 @@ class WalletsController < ApplicationController
   # GET /wallets.json
   def index
     @wallets = Wallet.all
-
     respond_to do |format|
       format.html # wallet.html.erb
       format.json { render json: @wallets }
     end
   end
 
-  def wallet
-
+  def deposit
+    @user=User.find(params[:user_id])
+    @deposit = Order.new(params[:order])
+    if(current_user=@user)
+      @deposit.user=@user
+      @deposit.item.itemable=@user.wallet
+      @deposit.user=@user
+      if(@deposit.valid?)
+        @deposit.save
+        @order=new_order
+      else
+        respond_to do |format|
+          format.html { render action: "show" }
+          format.json { render json: @wallet.errors, status: :unprocessable_entity }
+          format.js
+        end
+      end
+     else
+      respond_to do |format|
+        format.html { redirect_to user_root_url, alert: 'Unauthorized' }
+        format.json {render :json => {:error=>"not found"},:status => 404}
+      end
+    end
   end
 
-
+  def confirm_order
+    @user=User.find(params[:user_id])
+    if(current_user=@user)
+      @deposit.user=@user
+      @deposit.item.itemable=@user.wallet
+      @deposit.user=@user
+      if(@deposit.save!)
+        @order=new_order
+      else
+        respond_to do |format|
+          format.html { render action: "show" }
+          format.json { render json: @wallet.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to user_root_url, alert: 'Unauthorized' }
+        format.json {render :json => {:error=>"not found"},:status => 404}
+      end
+    end
+  end
   # GET /wallets/1
   # GET /wallets/1.json
   def show
     @wallet = Wallet.find(params[:id])
-
+    @deposit=new_order
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @wallet }
@@ -74,6 +114,7 @@ class WalletsController < ApplicationController
     end
   end
 
+
   # DELETE /wallets/1
   # DELETE /wallets/1.json
   def destroy
@@ -85,4 +126,16 @@ class WalletsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+
+  def new_order
+    order=Order.new
+    order.item=Item.new
+    order.item.itemable=current_user.wallet
+    order.payment_processor=PaymentProcessor.new
+    order
+  end
+
 end

@@ -1,17 +1,39 @@
-<%= form_for(@wallet) do |f| %>
-  <% if @wallet.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@wallet.errors.count, "error") %> prohibited this wallet from being saved:</h2>
-
-      <ul>
-      <% @wallet.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<%= simple_form_for(deposit, :html =>{:id=>"deposit-form",:class=>"hide white form-horizontal letterPressed"}, :url =>   deposit_user_wallets_path(current_user)) do |f| %>
+   <div class="field-wrap">
+    <div class="control-group">
+      <%= f.fields_for :item do|i|   %>
+          <%=i.label :amount,:class=>"control-label",:required =>false do  %>
+              <i class="icon-money"></i> Amount (₦)
+          <% end %>
+          <%= i.input :amount, :label =>false,:wrapper_html => { :class => 'slider-input controls-row controls input_padding_extra' },:input_html => {:id=>"slider-range-min",:klass=>"span8", :value=>"10000", :min=>"5000", :max=>"100000" ,:step=>"5000",:type=>"number",:class=>"span4",:data=>{:units=>"naira"}} %>
       <% end %>
-      </ul>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <% if @deposit.errors.any? %>
+        <div class="control-group error">
+          <%=f.label :name,:class=>"control-label",:required =>false do  %>
+              <i class="icon-credit-card"></i> Payment Method
+          <% end %>
+          <div class="controls input_padding_extra">
+            <%= f.select(:payment_processor_id, options_from_collection_for_select_with_attributes(payment_methods, 'id', 'name', 'class', 'klass'),{:prompt => "Choose a Payment Method"}, {:id=>"payment_method",:data=>{"class"=>"span8"},:class=>"span8 selectMenu"}) %>
+            <p class="help-inline"><%= deposit.errors[:payment_processor_id].join(" , ") %></p>
+          </div>
+        </div>
+    <% else %>
+        <div class="control-group">
+          <%=f.label :name,:class=>"control-label",:required =>false do  %>
+              <i class="icon-credit-card"></i> Payment Method
+          <% end %>
+          <div class="controls input_padding_extra">
+            <%= f.select(:payment_processor_id, options_from_collection_for_select_with_attributes(payment_methods, 'id', 'name', 'class', 'klass'),{:prompt => "Choose a Payment Method"}, {:id=>"payment_method",:data=>{"class"=>"span8"},:class=>"span8 selectMenu"}) %>
+          </div>
+        </div>
+    <% end %>
+
+    <div class="control-group">
+      <div class="controls controls-row input_padding_extra ">
+        <button class="btn btn-warning btn-large pay" data-loading-text="loading.." type="button" >Deposit :0</button>
+      </div>
+    </div>
+    </div>
 <% end %>

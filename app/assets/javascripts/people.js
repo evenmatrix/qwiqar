@@ -35,19 +35,26 @@ jQuery(function($){
             "#allContacts":"allContacts",
              "#groupContacts":"groupContacts",
              "#contactTabs":"contactTabs",
-             "#contactTabs a:first":"activeTab"
+             "#contactTabs a:first":"activeTab",
+            "#newContactDialog":"contactDialog",
+            "#newContact":"newContactAnchor"
         },
 
         events:{
-
+            "click #newContact":"showNewContact"
         },
 
         proxied:[],
 
         init: function(){
-            this.contacts = Contacts.init({el:this.allContacts})
+            this.contacts = Contacts.init({el:this.allContacts,dialog:this.contactDialog})
             this.groups = Groups.init({el:this.groupContacts})
+            this.newContact = NewContact.init({el:this.contactDialog,url:this.newContactAnchor.attr('href')})
             this.tabController=TabController.init({el:this.el,options:{activeTabClass:"active",activePanelClass:"active"}})
+        },
+        showNewContact:function(ev){
+            this.newContact.show();
+            return false;
         }
     })
 

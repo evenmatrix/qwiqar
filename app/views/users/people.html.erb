@@ -7,15 +7,15 @@
         <%= currently_at_people_nav 'Contacts' %>
         <div class="tool-buttons pull-right">
           <div class="btn-group">
-            <a href="#contactModal" role="button" data-toggle="modal" class="btn btn-right zero-radius"><i class="icon-plus"></i> new contact</a>
-            <a href="#contactModal" role="button" data-toggle="modal" class="btn btn-right zero-radius"><i class="icon-plus"></i> new group</a>
+            <a href="<%= new_user_contact_url(current_user) %>" id="newContact" role="button" data-toggle="modal" class="btn btn-right zero-radius"><i class="icon-plus"></i> new contact</a>
+            <a href="#" role="button" data-toggle="modal" class="btn btn-right zero-radius"><i class="icon-plus"></i> new group</a>
           </div>
           </div>
         </div>
         <div class="tab-body">
           <div id="allContacts" class="tab-pane">
             <div class="search-container">
-              <%= form_tag(search_user_contacts_url(current_user), :method => "get",:class=>"search-form row-fluid") do %>
+              <%= form_tag(search_user_contacts_url(current_user),:data=>{:autocomplete=>autocomplete_user_contacts_url(current_user)},:method => "get",:class=>"search-form row-fluid") do %>
                   <div class="control-group">
                     <div class="controls input_padding_extra ">
                       <span class="tool-button"><i class="icon-search"></i></span>
@@ -216,11 +216,7 @@
   </div>
 </script>
 
-<script id="tool-buttons-search-tmpl" type="text/x-jquery-tmpl">
-  {{if search}}
-  <button role="button"  class="btn cancel btn-right zero-radius"><i class="icon-remove"></i> cancel</button>
-  {{/if}}
-</script>
+<%= render :partial => "layouts/contact_search"%>
 
 <div class="modal hide" id="groupModal" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">
   <div class="modal-header">

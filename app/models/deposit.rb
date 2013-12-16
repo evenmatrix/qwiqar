@@ -1,5 +1,5 @@
 class Deposit < ActiveRecord::Base
-  attr_accessible :amount
-  has_one :line_item, :as=>:item
+  has_one :item, :as=>:itemable
   belongs_to :wallet
+  accepts_nested_attributes_for :item
 end

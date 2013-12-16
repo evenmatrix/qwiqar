@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :sent_top_ups,:foreign_key => "sender_id",:class_name => "TopUp"
   has_many :received_top_ups,:foreign_key => "recipient_id",:class_name => "TopUp"
   has_many :contacts ,:dependent=>:destroy
-  has_many :phone_numbers ,:dependent=>:destroy, :as=>:entity
+  has_one :phone_number ,:dependent=>:destroy, :as=>:entity
   has_one :wallet ,:dependent=>:destroy
 
   def user_name

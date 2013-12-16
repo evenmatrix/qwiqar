@@ -1,17 +1,41 @@
-<%= form_for(@top_up) do |f| %>
-  <% if @top_up.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@top_up.errors.count, "error") %> prohibited this top_up from being saved:</h2>
+<%= simple_form_for(top_up, :html =>{:id=>"transferForm",:class=>"hide form-horizontal letterPressed"}, :url =>   user_top_ups_path(current_user)) do |f| %>
+   <div class="control-row ">
+     <%= f.fields_for :item do|i|   %>
+         <div class="control-group span6 <%= field_class top_up.item,:amount %>">
+           <%=i.label :amount,:class=>"control-label",:required =>false do  %>
+               <i class="icon-money"></i> Credit Units (₦)
+           <% end %>
+           <div class="controls input_padding_extra">
+            <%=i.input :amount, :collection => TopUp::UNITS,:label =>false,:wrapper => false ,:error => false,:input_html => {:class=>"amountSelect span12"} %>
+             <%= error_html top_up.item,:amount %>
+           </div>
+          </div>
+     <% end %>
 
-      <ul>
-      <% @top_up.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+     <div class="control-group span6 <%= field_class top_up,:payment_processor_id %>">
+       <%=f.label :payment_processor_id,:class=>"control-label",:required =>false do  %>
+           <i class="icon-credit-card"></i> Payment Method
+       <% end %>
+       <div class="controls input_padding_extra">
+         <%= f.select(:payment_processor_id, options_from_collection_for_select_with_attributes(payment_methods, 'id', 'name', 'class', 'klass'),{:prompt => "Choose a Payment Method"}, {:id=>"payment",:data=>{"class"=>"payment span12"},:class=>"payment span12"}) %>
+         <%= error_html top_up,:payment_processor_id %>
+       </div>
+     </div>
+         <div class="clearfix"></div>
+        </div>
+      <div class="control-group message-area <%= field_class top_up,:message %>">
+        <%=f.label :message ,:class=>"control-label",:required =>false do  %>
+            <i class="fa fa-envelope"></i> Message <span class="message-count count badge badge-success">160</span>
+        <% end %>
+        <div class="controls input_padding_extra">
+          <%=f.input :message,:as => :text,:label =>false,:wrapper => false ,:error => false,:input_html => {:rows=>"3",:cols=>"",:maxlength=>"160",:class=>"span12 message"} %>
+          <%= error_html top_up,:message %>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls transfer-info controls-row input_padding_extra ">
+          <button data-loading-text="loading.." class="pay btn btn-warning btn-large" type="button" > Next <i class="fa fa-arrow-right"></i></button>
+          <span class="offer-text">5% off</span>
+        </div>
+      </div>
 <% end %>

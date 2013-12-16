@@ -1,9 +1,21 @@
 <div class="page">
 <div class="row-fluid">
-  <%= currently_at_side_nav 'Order History' %>
+  <%= currently_at_side_nav 'History' %>
   <div class="main span8">
-    <div id="orders" class="">
-      <div id="history">
+    <div id="history" class="box">
+    <ul id="historyTabs" class="nav nav-tabs ">
+      <li class="active">
+        <a href=""  data-target="#orderHistory" data-toggle="tab">Orders</a>
+      </li>
+      <li class="">
+        <a href=""  data-target="#transferHistory" data-toggle="tab">Transfers</a>
+      </li>
+      <li class="">
+        <a href=""  data-target="#depositHistory" data-toggle="tab">Deposits</a>
+      </li>
+    </ul>
+    <div class="tab-body clearfix">
+      <div id="orderHistory" class="history tab-pane active">
         <div class="tableContent">
           <header class="letterPressed clearfix">
             <div class="top-btn-container">
@@ -91,12 +103,336 @@
           </div>
         </div>
       </div>
+
+      <div id="transferHistory" class="history tab-pane">
+      <div class="tableContent">
+      <header class="letterPressed clearfix">
+        <div class="top-btn-container">
+          <h5 class="light-header pull-left">
+            <i class="icon-time"></i> History
+          </h5>
+                  <span class="tool-bar">
+                    <button class="btn" type="button"><i class="icon-double-angle-left"></i></button>
+                    &nbsp;  2/6   &nbsp;
+                    <button class="btn" type="button"><i class="icon-double-angle-right"></i></button>
+                    <div class="btn-group ">
+                      <a class="btn  dropdown-toggle" data-toggle="dropdown" href="#">
+                        Filter
+                        <span class="caret"></span>
+                      </a>
+                      <div class="dropdown-menu">
+                        <li class="">
+                          <a tabindex="-1" href="#">Date</a>
+                        </li>
+                        <li class="">
+                          <a tabindex="-1" href="#">Status</a>
+                        </li>
+                      </div>
+                    </div>
+                  </span>
+
+
+          <div class="input-append input-prepend">
+            <span class="add-on"><i class="icon-search"></i></span>
+            <input class="span8" id="appendedInputButtons" size="16" type="text"><button class="btn btn-primary" type="button">Search</button>
+
+          </div>
+        </div>
+        <div class="tab-form-container">
+          <div class="divider-horizontal-b"></div>
+          <h6 class="light-header pull-left status-el">
+            Status &nbsp; <i class="fa fa-toggle-right"></i>
+          </h6>
+          <form class="option-form form-inline">
+                    <span class="date-el" style="display: none;">
+                    <label>Start Date</label>
+                    <input type="text" class="input-medium" placeholder="">
+                    <button class="btn" type="button"><i class="icon-calendar"></i></button>
+                    <span>&nbsp;  &nbsp;</span>
+
+                    <label>End Date</label>
+
+                    <input type="text" class="input-medium" placeholder="">
+                    <button class="btn" type="button"><i class="icon-calendar"></i></button>
+                     </span>
+                    <span class="filter-el">
+                      <label class="checkbox inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1"> success
+                      </label>
+                      <label class="checkbox inline">
+                        <input type="checkbox" id="inlineCheckbox2" value="option2"> Failed
+                      </label>
+                      <label class="checkbox inline">
+                        <input type="checkbox" id="inlineCheckbox3" value="option3"> Pending
+                      </label>
+                    </span>
+          </form>
+        </div>
+      </header>
+      <div class="tableContainer">
+        <table class="table table-st letterPressed table-hover">
+          <thead>
+          <tr>
+            <th>Recipient</th>
+            <th>Order No</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Details</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <div class="inner">
+                <div class="user">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Onyemaechi Okafor</h6>
+                    <p><i class="icon-phone"></i> 080994459595</p>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="inner">
+                1234567
+              </div>
+            </td>
+            <td>
+              <div class="inner">
+                ₦50.00
+              </div>
+            </td>
+            <td>
+              <div class="inner">
+                12/2/1989
+              </div>
+            </td>
+            <td>
+              <div class="inner">
+                <span class="label label-success"><i class="fa fa-flag"></i> success </span>
+              </div>
+            </td>
+            <td>
+              <div class="inner">
+                <a class="btn" role="button"> details</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="inner">
+                <div class="user">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Onyemaechi Okafor</h6>
+                    <p><i class="icon-phone"></i> 080994459595</p>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="inner">
+                1234567
+              </div>
+            </td>
+            <td>
+              <div class="inner">
+                ₦50.00
+              </div>
+            </td>
+            <td>
+              <div class="inner">
+                12/2/1989
+              </div>
+            </td>
+            <td>
+              <div class="inner">
+                <span class="label label-success"><i class="fa fa-flag"></i> success </span>
+              </div>
+            </td>
+            <td>
+              <div class="inner">
+                <a class="btn" role="button"> details</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="inner">
+                <div class="user">
+                  <div class="avatar">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header ui-inline-text">Onyemaechi Okafor</h6>
+                    <p><i class="icon-phone"></i> 080994459595</p>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="inner">
+                1234567
+              </div>
+            </td>
+            <td>
+              <div class="inner">
+                ₦50.00
+              </div>
+            </td>
+            <td>
+              <div class="inner">
+                12/2/1989
+              </div>
+            </td>
+            <td>
+              <div class="inner">
+                <span class="label label-success"><i class="fa fa-flag"></i> success </span>
+              </div>
+            </td>
+            <td>
+              <div class="inner">
+                <a class="btn" role="button"> details</a>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+      </div>
+
+      <div id="depositHistory" class ="history tab-pane">
+        <div class="tableContent">
+          <header class="letterPressed clearfix">
+            <div class="top-btn-container">
+              <h5 class="light-header pull-left">
+                <i class="icon-time"></i> History
+              </h5>
+                  <span class="tool-bar">
+                    <button class="btn" type="button"><i class="icon-double-angle-left"></i></button>
+                    &nbsp;  2/6   &nbsp;
+                    <button class="btn" type="button"><i class="icon-double-angle-right"></i></button>
+                    <div class="btn-group ">
+                      <a class="btn  dropdown-toggle" data-toggle="dropdown" href="#">
+                        Filter
+                        <span class="caret"></span>
+                      </a>
+                      <div class="dropdown-menu">
+                        <li class="">
+                          <a tabindex="-1" href="#">Date</a>
+                        </li>
+                        <li class="">
+                          <a tabindex="-1" href="#">Status</a>
+                        </li>
+                      </div>
+                    </div>
+                  </span>
+
+
+              <div class="input-append input-prepend">
+                <span class="add-on"><i class="icon-search"></i></span>
+                <input class="span8" id="appendedInputButtons" size="16" type="text"><button class="btn btn-primary" type="button">Search</button>
+
+              </div>
+            </div>
+            <div style="display: none;" class="tab-form-container">
+              <div class="divider-horizontal-b"></div>
+              <h6 class="light-header pull-left status-el">
+                Status &nbsp; <i class="fa fa-toggle-right"></i>
+              </h6>
+              <form class="option-form form-inline">
+                    <span class="date-el" style="display: none;">
+                    <label>Start Date</label>
+                    <input type="text" class="input-medium" placeholder="">
+                    <button class="btn" type="button"><i class="icon-calendar"></i></button>
+                    <span>&nbsp;  &nbsp;</span>
+
+                    <label>End Date</label>
+
+                    <input type="text" class="input-medium" placeholder="">
+                    <button class="btn" type="button"><i class="icon-calendar"></i></button>
+                     </span>
+                    <span class="filter-el">
+                      <label class="checkbox inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1"> success
+                      </label>
+                      <label class="checkbox inline">
+                        <input type="checkbox" id="inlineCheckbox2" value="option2"> Failed
+                      </label>
+                      <label class="checkbox inline">
+                        <input type="checkbox" id="inlineCheckbox3" value="option3"> Pending
+                      </label>
+                    </span>
+              </form>
+            </div>
+          </header>
+          <div class="tableContainer">
+            <table class="table table-st letterPressed table-hover">
+              <thead>
+              <tr>
+                <th>Order No</th>
+                <th>Credit</th>
+                <th>Amount Billed</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Details</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>
+                  <div class="inner">
+                    1234567
+                  </div>
+                </td>
+                <td>
+                  <div class="inner">
+                    ₦10000
+                  </div>
+                </td>
+                <td>
+                  <div class="inner">
+                    ₦9700.00
+                  </div>
+                </td>
+                <td>
+                  <div class="inner">
+                    12/2/1989
+                  </div>
+                </td>
+                <td>
+                  <div class="inner">
+                    <span class="label label-success"><i class="fa fa-flag"></i> success </span>
+                  </div>
+                </td>
+                <td>
+                  <div class="inner">
+                    <a class="btn" role="button"> details</a>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
 </div>
 
 <% content_for :javascript_contents do %>
-    <%= javascript_include_tag "wallets" %>
+    <%= javascript_include_tag "histories" %>
 <% end %>
 
 <div class="modal hide" id="editModal" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">

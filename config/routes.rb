@@ -16,18 +16,23 @@ Qwiqar::Application.routes.draw do
     resources :contacts do
       collection do
         get :search
+        get :autocomplete
       end
     end
 
     resources :top_ups do
       collection do
         get :top_up
+        get :phone_number
+        get :contact
+        post :create_contact
+        post :create_phone_number
       end
     end
 
     resources :wallets do
       collection do
-        get :top_up
+        post :deposit
       end
     end
 
@@ -35,9 +40,16 @@ Qwiqar::Application.routes.draw do
   end
 
 
-  resources :orders
+  resources :orders,only:[:index,:destroy] do
+    member do
+     post :confirm
+     post :cancel
+    end
+end
 
   resources :feedback_messages ,:only => [:create]
+  post '/interswitch_notify' => 'interswitch_notification#interswitch_notify', as: :interswitch_notify
+  get '/interswitch_notify' => 'interswitch_notification#show_interswitch_order_status', as: :show_interswitch_order_status
 
   get "home/index"
   root :to => "home#index"
