@@ -1,0 +1,8 @@
+<% if @deposit.errors.any? %>
+(function(){
+    $("#quickTopUp").trigger("top_up:new",{el:'<%= escape_javascript(render :partial => "top_ups/form",locals: {top_up:@top_up,phone_number:@phone_number})%>'})
+})()
+<% else %>
+$("#quickTopUp").trigger("top_up:new",{el:'<%= escape_javascript(render :partial => "top_ups/form",locals: {top_up:@top_up,phone_number:@phone_number})%>'})
+$("#wallet").trigger("top_up:order",{el:'<%= escape_javascript(render :partial => "top_ups/top_up_order",locals: {order:@order})%>'})
+<% end %>

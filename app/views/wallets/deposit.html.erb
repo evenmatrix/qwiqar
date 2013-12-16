@@ -1,0 +1,19 @@
+<div class="page">
+  <div class="row-fluid">
+    <%= currently_at_side_nav 'Wallet' %>
+    <div class="main span8">
+      <div id="wallet" class="">
+        <div id="wallet" class="box">
+          <%= render :partial => "wallets/form" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render :partial => "wallets/wallet_order" %>
+  <% content_for :javascript_contents do %>
+      <%= javascript_include_tag "wallets" %>
+  <% end %>
+
+
+
+</div>

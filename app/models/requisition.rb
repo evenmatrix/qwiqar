@@ -1,0 +1,3 @@
+class Requisition < ActiveRecord::Base
+  # attr_accessible :title, :body
+end

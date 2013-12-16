@@ -1,0 +1,33 @@
+<%= simple_form_for(top_up, :html =>{:id=>"transferForm",:class=>"hide white form-horizontal letterPressed"}, :url =>  create_contact_user_top_ups_url(current_user)) do |f| %>
+    <div class="field-wrap">
+          <%= simple_fields_for contact do|b|   %>
+              <div class="control-group" >
+                <%=f.label :recepient,:class=>"control-label",:required =>false do  %>
+                    <i class="icon-user"></i> To
+                <% end %>
+                <div class="controls controls-row input_padding_extra">
+                  <div class="span8">
+                    <div class="user">
+                      <a class="op ">
+                        <div class="inner">
+                          <div class="avatar small">
+                            <%= image_tag "avatar.png" %>
+                          </div>
+                          <div class="user-info">
+                            <h6 class="light-header">Paul</h6>
+                            <p><i class="icon-phone"></i> 08099447050</p>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="span4">
+                  </div>
+                </div>
+              </div>
+                <%= b.input :id, :label =>false,:as=>:hidden,:input_html => {:class=>"type"} %>
+          <% end %>
+      <%= render partial:"top_ups/form",locals: {top_up:top_up} %>
+  </div>
+
+<% end %>

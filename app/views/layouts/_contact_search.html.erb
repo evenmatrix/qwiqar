@@ -1,0 +1,19 @@
+<script id="contact-search-tmpl" type="text/x-jquery-tmpl">
+  <div>
+    <div class="inner clearfix">
+      <div class="avatar small">
+        <img src="${photo_url}"/>
+      </div>
+      <div class="user-info">
+        <h6 class="light-header">${name}</h6>
+        <p><i class="icon-phone"></i> ${phone_number.number}</p>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id="tool-buttons-search-tmpl" type="text/x-jquery-tmpl">
+  {{if search}}
+  <button role="button"  class="btn cancel btn-right zero-radius"><i class="icon-remove"></i> cancel</button>
+  {{/if}}
+</script>

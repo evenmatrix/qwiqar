@@ -1,0 +1,25 @@
+<%= f.fields_for :item do|i|   %>
+    <div class="control-group">
+      <%=i.label :amount,:class=>"control-label",:required =>false do  %>
+          <i class="icon-money"></i> Credit Units (₦)
+      <% end %>
+      <%= i.input :amount, :label =>false,:wrapper_html => { :class => 'slider-input controls-row controls input_padding_extra' },:input_html => {:id=>"slider-range-min",:klass=>"span8", :value=>"1000", :min=>"500", :max=>"30000" ,:step=>"500",:type=>"number",:class=>"span4",:data=>{:units=>"naira"}} %>
+    </div>
+<% end %>
+
+<%= simple_form_for(top_up, :html =>{:id=>"transferForm",:class=>"hide white form-horizontal letterPressed"}, :url =>   create_phone_number_user_top_ups_url(current_user)) do |f| %>
+    <div class="field-wrap">
+      <%= simple_fields_for phone_number do|i|   %>
+          <div class="control-group active phone-control tabbed-control">
+            <%=i.label :number,:class=>"control-label",:required =>false do  %>
+                <i class="icon-mobile"></i> Phone Number</label>
+            <% end %>
+            <div class="controls controls-row input_padding_extra">
+              <%=i.input :carrier_id, :collection => Carrier.all(:order => 'name'),:label_method=>:name,:value_method=>:id, :prompt => "Select Operator",:label =>false,:wrapper=>false,:input_html => {:data=>{"class"=>"span4"},:class=>"selectMenu span4"} %>
+              <%= i.input :number, :label =>false,:wrapper=>false,:input_html => {placeholder:"080xxxxxxxx",:class=>"phoneNumberInput span8"} %>
+            </div>
+          </div>
+      <% end %>
+      <%= render partial:"top_ups/form",locals: {top_up:top_up} %>
+    </div>
+<% end %>

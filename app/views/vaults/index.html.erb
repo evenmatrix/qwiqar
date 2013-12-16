@@ -1,0 +1,21 @@
+<h1>Listing vaults</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @vaults.each do |vault| %>
+  <tr>
+    <td><%= link_to 'Show', vault %></td>
+    <td><%= link_to 'Edit', edit_vault_path(vault) %></td>
+    <td><%= link_to 'Destroy', vault, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Vault', new_vault_path %>

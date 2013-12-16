@@ -1,0 +1,191 @@
+<div class="page">
+<div class="row-fluid">
+  <%= currently_at_side_nav 'Top Up' %>
+  <div class="main span8">
+    <div id="topUp" class="box box-main">
+      <div id="quickTopUp">
+        <header class="box-header clearfix">
+          <h3 class="light-header"><i class="title-icon icon-publish"></i> <span class="text"> Top Up</span>
+            <div class="btn-group">
+              <a href="<%= phone_number_user_top_ups_url(current_user) %>"  class="phone_number btn btn-right zero-radius"><i class="icon-mobile"></i> Phone Number</a>
+              <a href="<%= contact_user_top_ups_url(current_user) %>" data-contacts-url="<%= user_contacts_url(current_user)%>" class="contact btn btn-right zero-radius"><i class="icon-user"></i> Contact</a>
+            </div>
+          </h3>
+          <div class="tool-buttons ">
+          </div>
+        </header>
+        <div class="top-up-wrap">
+          <%=  yield(:top_up)%>
+        </div>
+        <div class="modal hide" id="topUpOrderModal" role="dialog" ></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :javascript_contents do %>
+    <%= javascript_include_tag "top_up" %>
+<% end %>
+
+<script id="progress-tmpl" type="text/x-jquery-tmpl">
+  <div class="progressState">
+    <div class="alert alert-warning">
+      Loading...
+    </div>
+  </div>
+</script>
+<script id="error-tmpl" type="text/x-jquery-tmpl">
+  <div class="progressState">
+    <div class="alert alert-error">
+      ${message}
+    </div>
+  </div>
+</script>
+
+
+<script id="modal-progress-tmpl" type="text/x-jquery-tmpl">
+  <div class="modal-progress">
+    <div class="spinner">
+    </div>
+  </div>
+</script>
+
+<script id="spinner-tmpl" type="text/x-jquery-tmpl">
+  <div class="progress-wrap">
+    <div class="spinner">
+    </div>
+  </div>
+</script>
+
+<script id="contact-picker-item-tmpl" type="text/x-jquery-tmpl">
+  <li id="${url}">
+    <a class="op">
+      <div class="inner">
+        <div class="avatar small">
+          <img src="${photo_url}"/>
+        </div>
+        <div class="user-info">
+          <h6 class="light-header">${name}</h6>
+          <p><i class="icon-phone"></i> ${phone_number.number}</p>
+        </div>
+      </div>
+    </a>
+  </li>
+</script>
+
+<script id="user-control-tmpl" type="text/x-jquery-tmpl">
+  <div class="span8">
+    <div class="user">
+      <a class="op ">
+        <div class="inner">
+          <div class="avatar small">
+            <img src="${photo_url}"/>
+          </div>
+          <div class="user-info">
+            <h6 class="light-header">${name}</h6>
+            <p><i class="icon-phone"></i> ${phone_number.number}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="span4">
+    <p class="phone_number"><i class="icon-phone"></i> ${phone_number.number}</p>
+  </div>
+</script>
+
+<%= render :partial => "layouts/contact_search"%>
+
+<div class="modal hide" id="confirmModal" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">
+  <div class="modal-header">
+    <div class="inner">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <div class="contactHeader">
+        <div class="icon">
+          <i class="fa fa-warning"></i>
+        </div>
+        <div class="info indent">
+          <h3>Confirm</h3>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="content modal-body override">
+    <div class="modal-content-body">
+      <div class="pay-slip row-fluid letterPressed">
+        <div class="notice-info centered">
+          <div class="card">
+            <div class="amount-wrap">
+              N50000 <i class="icon-arrow-right"></i>
+
+            </div>
+            <div class="user ">
+              <a class="op ">
+                <div class="inner">
+                  <div class="avatar small">
+                    <%= image_tag "avatar.png" %>
+                  </div>
+                  <div class="user-info">
+                    <h6 class="light-header"> Onyemaechi Okafor </h6>
+                    <p><i class="icon-phone"></i> 08099447050</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="alert alert-info">
+            <strong>N5000</strong> would be deducted from your wallet when the transaction is complete. Please click on <strong>Yes</strong> to proceed and <strong>No</strong> to cancel</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger" ><i class="fa fa-times"></i> No</button>
+    <button class="btn btn-primary"><i class="fa fa-check"></i> Yes &raquo;</button>
+    <div class="shadow-top-wrap">
+      <div class="shadow-bottom"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal hide" id="contactPicker" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">
+  <div class="modal-header">
+    <div class="inner">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <div class="contactHeader">
+        <div class="icon">
+          <i class="icon-users"></i>
+        </div>
+        <div class="info">
+          <h3>Pick Contact</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content modal-body">
+    <div class="contactPickerWrap">
+      <div class="contactPickerHeader lightPadded">
+        <%= form_tag(search_user_contacts_url(current_user),:data=>{:autocomplete=>autocomplete_user_contacts_url(current_user)}, :method => "get",:class=>"search-form row-fluid") do %>
+            <div class="control-group">
+              <div class="controls input_padding_extra ">
+                <span class="tool-button"><i class="icon-search"></i></span>
+                <input type="text" id="q" name="q" class="search typeahead span12"  placeholder="Type a contact name">
+
+              </div>
+            </div>
+        <% end %>
+      </div>
+      <div class="contactContent">
+        <ul class="items contactItems letterPressed">
+        </ul>
+        <div class="load"></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn"><i class="icon-remove"></i> close</button>
+  </div>
+</div>
+</div>

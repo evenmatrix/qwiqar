@@ -1,0 +1,3 @@
+(function(){
+    $("#quickTopUp").trigger("top_up:order",{el:'<%= escape_javascript(render :partial => "top_ups/top_up_order",locals: {top_up:@top_up,order:@order})%>'})
+})()

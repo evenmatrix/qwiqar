@@ -1,0 +1,4 @@
+<% content_for :top_up do %>
+<%= render partial: "top_ups/phone_number_form",locals: {top_up:@top_up,phone_number:@phone_number} %>
+<% end %>
+<%= render partial:"top_ups/top_up_layout" %>
