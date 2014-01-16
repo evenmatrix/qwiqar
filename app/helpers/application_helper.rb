@@ -80,11 +80,11 @@ module ApplicationHelper
 
   def class_for_status(status)
     case status
-      when "successful"
+      when "success","payed"
         'success'
-      when "processing","pending"
+      when "processing","pending","confirmed"
         'warning'
-      when "cancelled"
+      when "cancelled","failed"
         'error'
       else
         ""
@@ -93,11 +93,11 @@ module ApplicationHelper
 
   def label_class_for_status(status)
     case status
-      when "successful"
+      when "success","payed"
         'success'
-      when "processing","pending"
+      when "processing","pending","confirmed"
         'warning'
-      when "cancelled"
+      when "cancelled","failed"
         'important'
       else
         ""
@@ -169,10 +169,12 @@ module ApplicationHelper
     options_for_select(options, select_deselect)
   end
 
-  def alert_for_payment_gateway(gateway)
-    partial = case gateway.name
-                when "Interswitch"
-                  render partial: 'application/interswitch_alert_info'
+  def alert_for_payment_gateway(order)
+    partial = case order.payment_processor.name
+                when "interswitch"
+                  render partial: 'application/interswitch_alert_info',locals: {order:order}
+                when "wallet"
+                  render partial: 'application/wallet_alert_info',locals: {order:order}
               end
   end
 
@@ -203,4 +205,43 @@ module ApplicationHelper
     end
   end
 
+  def payment_form_for_order(order)
+    type = order.payment_processor.name
+    partial = case type
+                when "wallet"
+                  render partial: 'application/wallet_pay_button',locals: {wallet: map_order_to_wallet_params(order),order:order}
+                when "interswitch"
+                  render partial: 'application/interswitch_pay_button',locals: {interswitch:map_order_to_interswitch_params(order,show_interswitch_order_status_url),order:order}
+              end
+  end
+
+  def top_up_header(top_up)
+    partial = case top_up.type
+                when "PhoneNumberTopUp"
+                  render partial: 'top_ups/phone_number_top_up_header',locals: {top_up: top_up}
+                when "ContactTopUp"
+                  render partial: 'top_ups/contact_top_up_header',locals: {top_up: top_up}
+              end
+  end
+
+  def format_date_a(t)
+    t.strftime("%m/%d/%Y")
+  end
+  def format_date_b(t)
+    t.strftime("%A, %B %d %Y")
+  end
+
+  def format_date_c(t)
+    t.strftime("%H:%M")
+  end
+
+
+  def order_item(order)
+    partial = case order.item.itemable_type
+                when "Wallet"
+                  render partial: 'wallets/wallet_order',locals: {order:order}
+                when "TopUp"
+                  render partial: 'top_ups/top_up_order',locals: {order:order,top_up:order.item.itemable}
+              end
+  end
 end

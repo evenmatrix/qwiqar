@@ -63,7 +63,6 @@ jQuery(function($){
             this.phoneNumberBtn.click()
         },
         showTopUpOrder:function(ev,item){
-            console.log("item",item.el)
         this.topUpOrderModal.html(item.el);
         this.topUpOrder=TopUpOrder.init({el:this.topUpOrderModal})
         },
@@ -115,6 +114,7 @@ jQuery(function($){
         },
         pickContact:function(ev){
             var url=$(ev.currentTarget).data("contacts-url")
+            console.log("contacts-url",url)
             this.contactPicker.show(url);
             return false;
         }
@@ -248,14 +248,14 @@ jQuery(function($){
 jQuery(function($){
     window.TopUpOrder = Spine.Controller.create({
         elements:{
-            ".confirm":"confirmButton",
+            ".pay":"payButton",
             ".cancel":"cancelButton",
             "#pay-form":"payForm"
         },
 
         events:{
             "change #slider-range-min":"checkPayValue",
-            "click .confirm":"confirm",
+            "click .pay":"pay",
             "click .cancel":"cancel",
             "click .contactPicker":"pickContact"
         },
@@ -289,22 +289,33 @@ jQuery(function($){
             })
             return false;
         },
-        confirm:function(){
-            if(this.confirmButton.hasClass("disabled")) return false;
+        pay:function(){            if(this.payButton.hasClass("disabled")) return false;
 
-            this.confirmButton.button("loading")
-            var url=this.confirmButton.data('confirm-url')
-            $.ajax({
-                type: "POST",
-                url: url+".json ",
-                error:this.proxy(function(data){
-                    this.confirmButton.button("reset")
-                }),
-                success:this.proxy(function(data){
-                    this.payForm.submit()
-                })
-            })
+            this.payButton.button("loading")
+            var gateway=this.payButton.data('payment-method')
+            console.log("gateway",gateway)
+            switch(gateway){
+                case "interswitch":
+                    this.payForm.submit();
+                    break;
+                case "wallet":
+                    data=this.payForm.serialize();
+                    url=this.payForm.attr("action")
+                    $.ajax({
+                        type: "POST",
+                        url: url+".js",
+                        data:data,
+                        error:this.proxy(function(data){
+                            this.payButton.button("reset")
+                        }),
+                        success:this.proxy(function(data){
+
+                        })
+                    })
+                    break;
+            }
             return false;
+
         }
     })
 

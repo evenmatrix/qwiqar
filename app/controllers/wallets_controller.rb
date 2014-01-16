@@ -1,3 +1,4 @@
+include WalletsHelper
 class WalletsController < ApplicationController
   # GET /wallets
   # GET /wallets.json
@@ -11,14 +12,13 @@ class WalletsController < ApplicationController
 
   def deposit
     @user=User.find(params[:user_id])
-    @deposit = Order.new(params[:order])
+    @order = Order.new(params[:order])
     if(current_user=@user)
-      @deposit.user=@user
-      @deposit.item.itemable=@user.wallet
-      @deposit.user=@user
-      if(@deposit.valid?)
-        @deposit.save
-        @order=new_order
+      @order.user=@user
+      @order.item.itemable=@user.wallet
+      @order.user=@user
+      if(@order.valid?)
+        @order.save
       else
         respond_to do |format|
           format.html { render action: "show" }
@@ -59,7 +59,7 @@ class WalletsController < ApplicationController
   # GET /wallets/1.json
   def show
     @wallet = Wallet.find(params[:id])
-    @deposit=new_order
+    @order=new_order
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @wallet }

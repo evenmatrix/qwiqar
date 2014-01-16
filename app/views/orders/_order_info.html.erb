@@ -1,0 +1,37 @@
+<div class="pay-slip row-fluid letterPressed">
+  <ul class="span6">
+    <li class="row-fluid info-block ">
+      <div class="span6 title">Order No</div>
+      <div class="span6 value"><%= order.transaction_id %></div>
+    </li>
+    <li class="row-fluid info-block ">
+      <div class="span6 title">Item Name</div>
+      <div class="span6 value"> <%= order.item.itemable.name %> </div>
+    </li>
+    <li class="row-fluid info-block ">
+      <div class="span6 title">Amount</div>
+      <div class="span6 value"><%= number_to_currency order.item.amount , unit: "₦" , precision: 0 %></div>
+    </li>
+    <li class="row-fluid info-block">
+      <div class="span6 title">Payment Method</div>
+      <div class="span6 value"><%= order.payment_processor.name%></div>
+    </li>
+    <li class="row-fluid info-block">
+      <div class="span6 title">Delivery Status</div>
+      <div class="span6 value"><%= order.item.state%></div>
+    </li>
+    <li class="row-fluid info-block">
+      <div class="span6 title">Total</div>
+      <div class="span6 value"><span class="label total label-important"><%= number_to_currency order.total_amount, unit: "₦" , precision: 0 %> </span></div>
+    </li>
+  </ul>
+  <div class="notice-info span6">
+    <%= render :partial => "orders/order_status",locals: {order:order} %>
+    <div class="query">
+      <%= link_to check_status_user_order_url(current_user,order),class:"btn btn-success requery btn-block",
+                  data: {"loading-text"=>"checking..."} do %>
+          <i class="fa fa-eye"></i> Check Status
+      <% end %>
+     </div>
+  </div>
+</div>

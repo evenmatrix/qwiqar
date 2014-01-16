@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :contacts ,:dependent=>:destroy
   has_one :phone_number ,:dependent=>:destroy, :as=>:entity
   has_one :wallet ,:dependent=>:destroy
+  has_many :orders  ,:dependent=>:destroy
 
   def user_name
     "#{self.first_name}##{self.last_name}#{self.id}"

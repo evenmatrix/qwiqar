@@ -11,6 +11,7 @@
  *= require jquery.ui.slider
  *= require bootstrap_and_overrides
  *= require fonts
+  *= require datepicker
  *= require chosen
  *= require icon
  *= require app

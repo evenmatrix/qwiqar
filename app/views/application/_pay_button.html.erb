@@ -1,0 +1,8 @@
+<% content_for :submit do %>
+    <% if order.failed? %>
+        <button class="btn btn-primary pay" data-payment-method="<%= order.payment_processor.name %>" type="button" data-loading-text="please wait..."><i class="fa fa-refresh"></i> Retry </button>
+    <% end %>
+    <% if order.pending? %>
+        <button class="btn btn-primary pay" data-payment-method="<%= order.payment_processor.name %>" type="button" data-loading-text="please wait..."><i class="fa fa-money"></i> Pay Now </button>
+    <% end %>
+<% end %>

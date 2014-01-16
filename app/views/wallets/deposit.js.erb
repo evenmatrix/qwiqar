@@ -1,8 +1,8 @@
-<% if @deposit.errors.any? %>
+<% if @order.errors.any? %>
 (function(){
-    $("#wallet").trigger("deposit:new",{el:'<%= escape_javascript(render :partial => "wallets/form",locals: {deposit:@deposit})%>'})
+    $("#wallet").trigger("deposit:new",{el:'<%= escape_javascript(render :partial => "wallets/form",locals: {order:@order})%>'})
 })()
 <% else %>
-    $("#wallet").trigger("deposit:new",{el:'<%= escape_javascript(render :partial => "wallets/form",locals: {deposit:@order})%>'})
-    $("#wallet").trigger("deposit:order",{el:'<%= escape_javascript(render :partial => "wallets/wallet_order",locals: {order:@deposit})%>'})
+    $("#wallet").trigger("deposit:new",{el:'<%= escape_javascript(render :partial => "wallets/form",locals: {order:new_order})%>'})
+    $("#wallet").trigger("deposit:order",{el:'<%= escape_javascript(render :partial => "wallets/wallet_order",locals: {order:@order})%>'})
 <% end %>

@@ -41,6 +41,7 @@ gem 'rest-client'
 gem 'hpricot'
 gem 'paperclip'
 gem 'valid_email'
+gem 'ransack'
 
 
 # To use ActiveModel has_secure_password

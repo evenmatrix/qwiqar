@@ -123,6 +123,8 @@ GEM
       activerecord (>= 3.1)
       activesupport (>= 3.1)
       arel
+    polyamorous (0.6.4)
+      activerecord (>= 3.0)
     polyglot (0.3.3)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
@@ -150,6 +152,10 @@ GEM
       thor (>= 0.14.6, < 2.0)
     raindrops (0.11.0)
     rake (10.1.0)
+    ransack (1.1.0)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      polyamorous (~> 0.6.0)
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.4)
@@ -242,6 +248,7 @@ DEPENDENCIES
   pg_search
   quiet_assets
   rails (= 3.2.13)
+  ransack
   rest-client
   roo
   sass-rails (~> 3.2.3)

@@ -5,15 +5,17 @@
     <div id="wallet" class="box">
       <header class="box-header">
         <h3 class="light-header"><i class="title-icon icon-diary"></i> <span class="text"> Wallet</span>
-          <span class="label account-label label-success pull-right"> <i class="icon-money"></i> <%= current_user.wallet.balance %></span>
+          <span class="label account-label label-success pull-right"> <%= number_to_currency current_user.wallet.balance , unit: " ₦ " , precision: 0 %></span>
         </h3>
         </header>
+      <div class="wallet-wrap">
+        <%= render partial:"wallets/form",locals: {order:@order} %>
+      </div>
       <div class="badgex">
         <span class="offer-class label label-success">Starter</span>
         <p class="offer">3%</p>
         <p class="offer-label">discount</p>
       </div>
-        <%= render partial:"wallets/form",locals: {deposit:@deposit} %>
     </div>
     <div class="modal hide" id="depositOrderModal" role="dialog" ></div>
   </div>

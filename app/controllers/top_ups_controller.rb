@@ -1,3 +1,4 @@
+include TopUpGenieHelper
 class TopUpsController < ApplicationController
   # GET /top_ups
   # GET /top_ups.json
@@ -26,6 +27,7 @@ class TopUpsController < ApplicationController
     if @user && current_user
       @top_up=ContactTopUp.new
       @top_up.item=Item.new
+      @top_up.contact=@contact
     else
       respond_to do |format|
         format.json {render :json => {:error=>"not found"},:status => 404}

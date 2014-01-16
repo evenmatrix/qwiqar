@@ -1,8 +1,13 @@
-<%= link_to cancel_order_url(order), method: 'delete',class:"btn cancel btb-danger",
-              data: {confirm: "Are you sure","loading-text"=>"cancelling..."} do %>
-      <i class="fa fa-times"></i> Cancel
-  <% end %>
-  <% content_for :submit do %>
-      <button class="btn btn-primary confirm" data-confirm-url="<%= confirm_order_url(order) %>" type="button" data-loading-text="please wait..."><i class="fa fa-check"></i> Pay Now &raquo;</button>
-  <% end %>
-  <%= render partial: 'web_pay_form',locals: {interswitch:map_order_to_interswitch_params(order,show_interswitch_order_status_url)} %>
+<% if order.pending? || order.failed?%>
+    <%= link_to cancel_user_order_url(current_user,order), method: 'delete',class:"btn cancel btn-danger",
+                data: {confirm: "Are you sure","loading-text"=>"cancelling..."} do %>
+        <i class="fa fa-times"></i> Cancel
+    <% end %>
+<% end %>
+<% if order.pending? || order.failed? %>
+    <%= payment_form_for_order order %>
+<% end %>
+
+<% if order.payed? %>
+    <button class="btn " data-dismiss="modal" type="button" ><i class="fa fa-times"></i> Close</button>
+<% end %>

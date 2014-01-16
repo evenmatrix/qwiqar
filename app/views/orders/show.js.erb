@@ -1,0 +1,3 @@
+(function(){
+    $("#OrderModal").trigger("orders:show",{el:'<%= escape_javascript(order_item(@order))%>'})
+})()

@@ -3,7 +3,7 @@ class PhoneNumber < ActiveRecord::Base
   belongs_to :entity,:polymorphic => true
   belongs_to :carrier
   has_many :phone_number_top_ups
-  validates_presence_of  :carrier_id,:number
+  validates_presence_of  :carrier,:number
   validates_uniqueness_of :number
 
   def self.uniq(carrier_id,number)

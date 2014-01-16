@@ -1,0 +1,13 @@
+<%= render :partial => "application/pay_button",locals: {order:order} %>
+
+<%= form_tag("https://stageserv.interswitchng.com/test_paydirect/pay",:method=>"POST",:id=>"pay-form",class:"interswitch form-inline" , data:{type:"interswitch "}) do |f| %>
+    <input name="product_id" type="hidden" value="<%= interswitch[:product_id] %>" />
+    <input name="pay_item_id" type="hidden" value="<%= interswitch[:pay_item_id] %>" />
+    <input name="amount" type="hidden" value="<%= interswitch[:amount] %>" />
+    <input name="currency" type="hidden" value="<%= interswitch[:currency] %>" />
+    <input name="site_redirect_url" type="hidden" value="<%=interswitch[:site_redirect_url] %>"/>
+    <input name="txn_ref"  type="hidden" value="<%= interswitch[:tnx_ref] %>" />
+    <input name="site_name" type="hidden" value="<%= interswitch[:site_name] %>" />
+    <input name="hash" type="hidden" value="<%= interswitch[:hash] %>" />
+    <%= yield(:submit) %>
+<% end %>

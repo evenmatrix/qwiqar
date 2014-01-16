@@ -33,19 +33,26 @@ Qwiqar::Application.routes.draw do
     resources :wallets do
       collection do
         post :deposit
+        post :pay
       end
     end
 
     resources :contact_groups
+
+    resources :orders, only:[:index,:destroy,:show] do
+      member do
+        post :pay
+        post :confirm
+        post :cancel
+        get :check_status
+      end
+      collection { post :search, to: 'orders#index' }
+    end
+
   end
 
 
-  resources :orders,only:[:index,:destroy] do
-    member do
-     post :confirm
-     post :cancel
-    end
-end
+
 
   resources :feedback_messages ,:only => [:create]
   post '/interswitch_notify' => 'interswitch_notification#interswitch_notify', as: :interswitch_notify

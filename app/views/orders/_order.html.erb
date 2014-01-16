@@ -1,0 +1,10 @@
+<tr class="<%= class_for_status(order.state) %> letter_pressed">
+  <td><%= order.transaction_id %></td>
+  <td><%= order.item.itemable.name %></td>
+  <td><span class="price"><%= number_to_currency order.item.amount, unit: "₦" , precision: 0%></span></td>
+  <td><span class="date"><%= MONTH[order.created_at.month-1]%> <%= order.created_at.day.to_i %></span><span class="time">12:35</span></td>
+  <td><%= link_to user_orders_url(order), class: "" do %>
+        <%=   order.state    %>
+    <% end %>
+  </td>
+  <td><%= order.payment_processor.name %></td>

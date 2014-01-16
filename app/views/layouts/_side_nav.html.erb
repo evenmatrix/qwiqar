@@ -9,8 +9,7 @@
           <div class="name elp">
             <h4 class="light-header ui-inline-text">Paul Aden Smith alonso</h4>
           </div>
-
-           <span class="account-label label label-success"><i class="icon-money"></i> 60,000</span>
+          <span class="account-label label label-success"> <%= number_to_currency current_user.wallet.balance , unit: " ₦ " , precision: 0 %></span>
         </div>
       </div>
       <div class="clearfix"></div>
@@ -23,8 +22,8 @@
       <%= nav_tab("Profile",profile_user_url(current_user), current:current_tab,icon:{:class=>"icon-vcard"}) %>
       <%= nav_tab("Wallet",user_wallet_url(current_user,current_user.wallet), current:current_tab,icon:{:class=>"icon-diary"}) %>
       <%= nav_tab("People",people_user_url(current_user), current:current_tab,icon:{:class=>"icon-group"}) %>
-      <%= nav_tab("History",orders_url, current:current_tab,icon:{:class=>"icon-history"}) %>
-      <%= nav_tab("Users",users_url, current:current_tab,icon:{:class=>"icon-users"}) %>
-    </ul>
+      <%= nav_tab("History",user_orders_url(current_user), current:current_tab,icon:{:class=>"icon-history"}) %>
+      <%= nav_tab("Gifts",users_url, current:current_tab,icon:{:class=>"icon-gift"}) %>
+     </ul>
   </div>
 </aside>

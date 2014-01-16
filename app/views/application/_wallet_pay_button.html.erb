@@ -1,0 +1,6 @@
+<%= render :partial => "application/pay_button",locals: {order:order} %>
+<%= simple_form_for(order, :url => pay_user_order_path(current_user,order),:html=>{:id=>"pay-form",:method=>"POST",class:"wallet form-inline" , data:{type:"wallet"}}) do |f| %>
+    <input name="transaction_id" type="hidden" value="<%= wallet[:transaction_id] %>" />
+    <input name="hash" type="hidden" value="<%= wallet[:hash] %>" />
+    <%= yield(:submit) %>
+<% end %>

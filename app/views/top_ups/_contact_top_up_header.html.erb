@@ -1,0 +1,9 @@
+<div class="user-info">
+  <div class="avatar">
+    <%= image_tag top_up.contact.photo.url(:icon) %>
+  </div>
+  <div class="info indent">
+    <span class="receiver">Top Up : <%= top_up.contact.name  %></span>
+    <h3><%= top_up.contact.phone_number.number %></h3>
+  </div>
+</div>

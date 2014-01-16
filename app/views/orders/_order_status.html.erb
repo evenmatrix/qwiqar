@@ -1,0 +1,20 @@
+<% if order.pending? %>
+    <%= alert_for_payment_gateway(order) %>
+    <div class="alert alert-warning">
+      <i class="fa fa-warning"></i> Your transaction is pending
+    </div>
+<% end %>
+
+<% if order.failed? %>
+    <div class="alert alert-error">
+      <h5 class="light-header" ><i class="fa fa-warning"></i> Your payment was not successful</h5>
+      <p><%= order.response_description.html_safe %></p>
+    </div>
+<% end %>
+
+<% if order.payed? %>
+    <div class="alert alert-success">
+      <h5 class="light-header" ><i class="fa fa-check"></i> Your payment was successful</h5>
+      <p>Thank you for using QwiQar</p>
+    </div>
+<% end %>

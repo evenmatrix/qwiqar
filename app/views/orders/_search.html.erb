@@ -1,0 +1,36 @@
+
+<div class="table-tool-bar">
+  <%= form_tag("#",:method=>"GET",:id=>"tableSearch",class:"option-form") do |f| %>
+      <div class="main-control">
+        <input class="search-btn" name="q" id="search-btn" placeholder="search" size="16" type="text">
+        <button class="btn btn-primary" type="button"><i class="icon-search"></i> Find</button>
+        <button class="btn advanced" type="button"><i class="icon-caret-down"></i> More</button>
+      </div>
+      <div class="tab-body search-inner letterPressed clearfix">
+        <div id="date-el" class="advanced-search hide">
+          <div class="search-field-wrap">
+            <%= label_tag(:start_date, "Start Date") %>
+            <div class="input-append date">
+              <%= text_field_tag(:start_date,"",:placeholder=>format_date_a(Date.today),:class=>"datepicker start_date input-medium",:data=>{:date=>"12-02-2012","date-format"=>"dd-mm-yyyy"}) %>
+              <span class="add-on"><i class="icon-calendar"></i></span>
+            </div>
+            <span>&nbsp;  &nbsp;</span>
+            <%= label_tag(:end_date, "End Date",class:"control-label") %>
+            <div class="controls input_padding_extra">
+            <div class="input-append date">
+              <%= text_field_tag(:end_date,"",:placeholder=>format_date_a(Date.today),:class=>"datepicker end_date input-medium") %>
+              <span class="add-on"><i class="icon-calendar"></i></span>
+            </div>
+          </div>
+
+          <div class="search-field-wrap">
+            <%= label_tag(:gateway, "Payment Gateway") %>
+            <%= select_tag(:gateway, options_for_select([['Interswitch',"interswitch"], ['Wallet',"wallet"]]),:class=>"filter",:data=>{:class=>"filter"},:prompt=>"Select a Payment Method") %>
+            <span>&nbsp;  &nbsp;</span>
+            <%= label_tag(:status, "Status") %>
+            <%= select_tag(:status, options_for_select([['pending','pending'], ['confirmed','confirmed'], ['success','success'], ['canceled','canceled'], ['failed','failed']]),:class=>"filter",:data=>{:class=>"filter"},:prompt=>"Select a Status") %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>

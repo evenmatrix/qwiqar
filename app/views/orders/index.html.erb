@@ -2,504 +2,174 @@
 <div class="row-fluid">
   <%= currently_at_side_nav 'History' %>
   <div class="main span8">
-    <div id="history" class="box">
-    <ul id="historyTabs" class="nav nav-tabs ">
-      <li class="active">
-        <a href=""  data-target="#orderHistory" data-toggle="tab">Orders</a>
-      </li>
-      <li class="">
-        <a href=""  data-target="#transferHistory" data-toggle="tab">Transfers</a>
-      </li>
-      <li class="">
-        <a href=""  data-target="#depositHistory" data-toggle="tab">Deposits</a>
-      </li>
-    </ul>
+    <div id="history" class="box-full">
+    <div class="tab-nav-container clearfix">
+        <ul id="historyTabs" class="nav nav-tabs pull-left">
+        <li class="active">
+          <a href=""  data-target="#all" data-toggle="tab">All</a>
+        </li>
+        <li class="">
+          <a href=""  data-target="#topUp" data-toggle="tab">Top Ups</a>
+        </li>
+        <li class="">
+          <a href=""  data-target="#deposit" data-toggle="tab">Deposits</a>
+        </li>
+      </ul>
+    </div>
     <div class="tab-body clearfix">
-      <div id="orderHistory" class="history tab-pane active">
+      <div id="all" class="history tab-pane ">
         <div class="tableContent">
-          <header class="letterPressed clearfix">
-            <div class="top-btn-container">
-              <h5 class="light-header pull-left">
-                <i class="icon-time"></i> History
-              </h5>
-                  <span class="tool-bar">
-                    <button class="btn" type="button"><i class="icon-double-angle-left"></i></button>
-                    &nbsp;  2/6   &nbsp;
-                    <button class="btn" type="button"><i class="icon-double-angle-right"></i></button>
-                    <div class="btn-group ">
-                      <a class="btn  dropdown-toggle" data-toggle="dropdown" href="#">
-                        Filter
-                        <span class="caret"></span>
-                      </a>
-                      <div class="dropdown-menu">
-                        <li class="">
-                          <a tabindex="-1" href="#">Date</a>
-                        </li>
-                        <li class="">
-                          <a tabindex="-1" href="#">Payment Gateway</a>
-                        </li>
-                        <li class="">
-                          <a tabindex="-1" href="#">Status</a>
-                        </li>
+          <div class="table-tool-bar">
+            <%= search_form_for @search,url:search_user_orders_path(current_user), method: :post, id: "tableSearch",class:"option-form" do |f| %>
+              <div class="main-control">
+                <div class="custom-search controls">
+                <div class="custom-search-input ">
+                  <%= f.text_field(:transaction_id_eq, placeholder: "search",class: "search-btn",:id=>"search-btn") %>
+                  <a class="custom-search-anchor"><i class="icon-caret-down"></i></a>
+                  <div class="search-options">
+                    <div class="field-wrap">
+                      <div class="control-group">
+                        <%= f.label(:created_at_gteq, "Start Date",class:"control-label")  %>
+                        <div class="controls">
+                          <%= f.text_field(:created_at_gteq,:placeholder=>format_date_a(Date.today),:class=>"datepicker span12 start_date input-medium",:data=>{:date=>"12-02-2012","date-format"=>"dd-mm-yyyy"}) %>
+                        </div>
+                      </div>
+                      <div class="control-group clearfix">
+                        <%= f.label(:created_at_lteq, "End Date",class:"control-label") %>
+                        <div class="controls">
+                          <%= f.text_field(:created_at_lteq,:placeholder=>format_date_a(Date.today),:class=>"datepicker span12 start_date input-medium",:data=>{:date=>"12-02-2012","date-format"=>"dd-mm-yyyy"}) %>
+                        </div>
+                      </div>
+                      <div class="control-group clearfix">
+                        <%= f.label(:payment_processor_id_eq, "Payment Gateway",class:"control-label") %>
+                        <div class="controls">
+                          <%= f.select(:payment_processor_id_eq, options_from_collection_for_select(PaymentProcessor.all, 'id', 'name'),:class=>"filter span12",:data=>{:class=>"filter span12"},:prompt=>"Select a Payment Method") %>
+                        </div>
+                      </div>
+                      <div class="control-group clearfix">
+                        <%= f.label(:state_eq, "Status",class:"control-label") %>
+                        <div class="controls">
+                          <%= f.select(:state_eq, options_for_select([['pending','pending'], ['confirmed','confirmed'], ['success','success'], ['canceled','canceled'], ['failed','failed']]),:class=>"filter span12",:data=>{:class=>"filter span12"},:prompt=>"Select a Status") %>
+                        </div>
+                      </div>
+                      <div class="control-group">
+                        <button class="btn btn-primary" type="submit"><i class="icon-search"></i> Find</button>
+
                       </div>
                     </div>
-                  </span>
-
-
-              <div class="input-append input-prepend">
-                <span class="add-on"><i class="icon-search"></i></span>
-                <input class="span8" id="appendedInputButtons" size="16" type="text"><button class="btn btn-primary" type="button">Search</button>
-
-              </div>
-            </div>
-            <div style="display: none;" class="tab-form-container">
-              <div class="divider-horizontal-b"></div>
-              <h6 class="light-header pull-left status-el">
-                Status &nbsp; <i class="fa fa-toggle-right"></i>
-              </h6>
-              <form class="option-form form-inline">
-                    <span class="date-el" style="display: none;">
-                    <label>Start Date</label>
-                    <input type="text" class="input-medium" placeholder="">
-                    <button class="btn" type="button"><i class="icon-calendar"></i></button>
-                    <span>&nbsp;  &nbsp;</span>
-
-                    <label>End Date</label>
-
-                    <input type="text" class="input-medium" placeholder="">
-                    <button class="btn" type="button"><i class="icon-calendar"></i></button>
-                     </span>
-                    <span class="filter-el">
-                      <label class="checkbox inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1"> success
-                      </label>
-                      <label class="checkbox inline">
-                        <input type="checkbox" id="inlineCheckbox2" value="option2"> Failed
-                      </label>
-                      <label class="checkbox inline">
-                        <input type="checkbox" id="inlineCheckbox3" value="option3"> Pending
-                      </label>
-                    </span>
-              </form>
-            </div>
-          </header>
+                  </div>
+                </div>
+                  <button class="btn btn-primary sr" type="submit"><i class="icon-search"></i> Find</button>
+                </div>
+                </div>
+            <% end %>
+          </div>
           <div class="tableContainer">
             <table class="table table-st letterPressed table-hover">
               <thead>
               <tr>
+                <th>User Id</th>
                 <th>Order No</th>
                 <th>Item</th>
                 <th>Amount</th>
-                <th>Gross Amount</th>
                 <th>Date</th>
                 <th>Status</th>
                 <th>Payment Gateway</th>
-                <th>Details</th>
+                <th>Delivery Status</th>
               </tr>
               </thead>
               <tbody>
+              <% @orders.each do |order| %>
+                  <tr class="<%= class_for_status(order.state) %> letter_pressed">
+                    <td>
+                      <%= link_to user_order_url(current_user,order), class: "" do %>
+                          <%= order.user.id %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= link_to user_order_url(current_user,order), class: "" do %>
+                          <%= order.transaction_id %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= link_to user_order_url(current_user,order), class: "" do %>
+                          <%= order.item.itemable_type %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= link_to user_order_url(current_user,order), class: "" do %>
+                          <span class="price"><%= number_to_currency order.item.amount, unit: "₦" , precision: 0%></span></td>
+                      <% end %>
+                    <td>
+                      <%= link_to user_order_url(current_user,order), class: "" do %>
+                          <span class="date"><%= MONTH[order.created_at.month-1]%> &nbsp; <%= order.created_at.day.to_i %>,&nbsp; <%= order.created_at.year.to_i %></span>,&nbsp;<span class="time"><%= format_date_c(order.created_at) %></span></td>
+                      <% end %>
+                    <td>
+                      <%= link_to user_order_url(current_user,order), class: "" do %>
+                          <%=   order.state    %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= link_to user_order_url(current_user,order), class: "" do %>
+                          <%= order.payment_processor.name %>
+                          <% end %>
+                     </td>
+                     <td>
+                        <%= link_to user_order_url(current_user,order), class: "" do %>
+                            <%= order.item.state %>
+                        <% end %>
+                      </td>
+              <% end %>
               </tbody>
             </table>
+            <%=  paginate("orders","index",class:"pagination")  %>
           </div>
         </div>
       </div>
-
-      <div id="transferHistory" class="history tab-pane">
-      <div class="tableContent">
-      <header class="letterPressed clearfix">
-        <div class="top-btn-container">
-          <h5 class="light-header pull-left">
-            <i class="icon-time"></i> History
-          </h5>
-                  <span class="tool-bar">
-                    <button class="btn" type="button"><i class="icon-double-angle-left"></i></button>
-                    &nbsp;  2/6   &nbsp;
-                    <button class="btn" type="button"><i class="icon-double-angle-right"></i></button>
-                    <div class="btn-group ">
-                      <a class="btn  dropdown-toggle" data-toggle="dropdown" href="#">
-                        Filter
-                        <span class="caret"></span>
-                      </a>
-                      <div class="dropdown-menu">
-                        <li class="">
-                          <a tabindex="-1" href="#">Date</a>
-                        </li>
-                        <li class="">
-                          <a tabindex="-1" href="#">Status</a>
-                        </li>
-                      </div>
-                    </div>
-                  </span>
-
-
-          <div class="input-append input-prepend">
-            <span class="add-on"><i class="icon-search"></i></span>
-            <input class="span8" id="appendedInputButtons" size="16" type="text"><button class="btn btn-primary" type="button">Search</button>
-
-          </div>
-        </div>
-        <div class="tab-form-container">
-          <div class="divider-horizontal-b"></div>
-          <h6 class="light-header pull-left status-el">
-            Status &nbsp; <i class="fa fa-toggle-right"></i>
-          </h6>
-          <form class="option-form form-inline">
-                    <span class="date-el" style="display: none;">
-                    <label>Start Date</label>
-                    <input type="text" class="input-medium" placeholder="">
-                    <button class="btn" type="button"><i class="icon-calendar"></i></button>
-                    <span>&nbsp;  &nbsp;</span>
-
-                    <label>End Date</label>
-
-                    <input type="text" class="input-medium" placeholder="">
-                    <button class="btn" type="button"><i class="icon-calendar"></i></button>
-                     </span>
-                    <span class="filter-el">
-                      <label class="checkbox inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1"> success
-                      </label>
-                      <label class="checkbox inline">
-                        <input type="checkbox" id="inlineCheckbox2" value="option2"> Failed
-                      </label>
-                      <label class="checkbox inline">
-                        <input type="checkbox" id="inlineCheckbox3" value="option3"> Pending
-                      </label>
-                    </span>
-          </form>
-        </div>
-      </header>
-      <div class="tableContainer">
-        <table class="table table-st letterPressed table-hover">
-          <thead>
-          <tr>
-            <th>Recipient</th>
-            <th>Order No</th>
-            <th>Amount</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Details</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>
-              <div class="inner">
-                <div class="user">
-                  <div class="avatar">
-                    <%= image_tag "avatar.png" %>
-                  </div>
-                  <div class="user-info">
-                    <h6 class="light-header ui-inline-text">Onyemaechi Okafor</h6>
-                    <p><i class="icon-phone"></i> 080994459595</p>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="inner">
-                1234567
-              </div>
-            </td>
-            <td>
-              <div class="inner">
-                ₦50.00
-              </div>
-            </td>
-            <td>
-              <div class="inner">
-                12/2/1989
-              </div>
-            </td>
-            <td>
-              <div class="inner">
-                <span class="label label-success"><i class="fa fa-flag"></i> success </span>
-              </div>
-            </td>
-            <td>
-              <div class="inner">
-                <a class="btn" role="button"> details</a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="inner">
-                <div class="user">
-                  <div class="avatar">
-                    <%= image_tag "avatar.png" %>
-                  </div>
-                  <div class="user-info">
-                    <h6 class="light-header ui-inline-text">Onyemaechi Okafor</h6>
-                    <p><i class="icon-phone"></i> 080994459595</p>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="inner">
-                1234567
-              </div>
-            </td>
-            <td>
-              <div class="inner">
-                ₦50.00
-              </div>
-            </td>
-            <td>
-              <div class="inner">
-                12/2/1989
-              </div>
-            </td>
-            <td>
-              <div class="inner">
-                <span class="label label-success"><i class="fa fa-flag"></i> success </span>
-              </div>
-            </td>
-            <td>
-              <div class="inner">
-                <a class="btn" role="button"> details</a>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="inner">
-                <div class="user">
-                  <div class="avatar">
-                    <%= image_tag "avatar.png" %>
-                  </div>
-                  <div class="user-info">
-                    <h6 class="light-header ui-inline-text">Onyemaechi Okafor</h6>
-                    <p><i class="icon-phone"></i> 080994459595</p>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </td>
-            <td>
-              <div class="inner">
-                1234567
-              </div>
-            </td>
-            <td>
-              <div class="inner">
-                ₦50.00
-              </div>
-            </td>
-            <td>
-              <div class="inner">
-                12/2/1989
-              </div>
-            </td>
-            <td>
-              <div class="inner">
-                <span class="label label-success"><i class="fa fa-flag"></i> success </span>
-              </div>
-            </td>
-            <td>
-              <div class="inner">
-                <a class="btn" role="button"> details</a>
-              </div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      </div>
-      </div>
-
-      <div id="depositHistory" class ="history tab-pane">
-        <div class="tableContent">
-          <header class="letterPressed clearfix">
-            <div class="top-btn-container">
-              <h5 class="light-header pull-left">
-                <i class="icon-time"></i> History
-              </h5>
-                  <span class="tool-bar">
-                    <button class="btn" type="button"><i class="icon-double-angle-left"></i></button>
-                    &nbsp;  2/6   &nbsp;
-                    <button class="btn" type="button"><i class="icon-double-angle-right"></i></button>
-                    <div class="btn-group ">
-                      <a class="btn  dropdown-toggle" data-toggle="dropdown" href="#">
-                        Filter
-                        <span class="caret"></span>
-                      </a>
-                      <div class="dropdown-menu">
-                        <li class="">
-                          <a tabindex="-1" href="#">Date</a>
-                        </li>
-                        <li class="">
-                          <a tabindex="-1" href="#">Status</a>
-                        </li>
-                      </div>
-                    </div>
-                  </span>
-
-
-              <div class="input-append input-prepend">
-                <span class="add-on"><i class="icon-search"></i></span>
-                <input class="span8" id="appendedInputButtons" size="16" type="text"><button class="btn btn-primary" type="button">Search</button>
-
-              </div>
-            </div>
-            <div style="display: none;" class="tab-form-container">
-              <div class="divider-horizontal-b"></div>
-              <h6 class="light-header pull-left status-el">
-                Status &nbsp; <i class="fa fa-toggle-right"></i>
-              </h6>
-              <form class="option-form form-inline">
-                    <span class="date-el" style="display: none;">
-                    <label>Start Date</label>
-                    <input type="text" class="input-medium" placeholder="">
-                    <button class="btn" type="button"><i class="icon-calendar"></i></button>
-                    <span>&nbsp;  &nbsp;</span>
-
-                    <label>End Date</label>
-
-                    <input type="text" class="input-medium" placeholder="">
-                    <button class="btn" type="button"><i class="icon-calendar"></i></button>
-                     </span>
-                    <span class="filter-el">
-                      <label class="checkbox inline">
-                        <input type="checkbox" id="inlineCheckbox1" value="option1"> success
-                      </label>
-                      <label class="checkbox inline">
-                        <input type="checkbox" id="inlineCheckbox2" value="option2"> Failed
-                      </label>
-                      <label class="checkbox inline">
-                        <input type="checkbox" id="inlineCheckbox3" value="option3"> Pending
-                      </label>
-                    </span>
-              </form>
-            </div>
-          </header>
-          <div class="tableContainer">
-            <table class="table table-st letterPressed table-hover">
-              <thead>
-              <tr>
-                <th>Order No</th>
-                <th>Credit</th>
-                <th>Amount Billed</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Details</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>
-                  <div class="inner">
-                    1234567
-                  </div>
-                </td>
-                <td>
-                  <div class="inner">
-                    ₦10000
-                  </div>
-                </td>
-                <td>
-                  <div class="inner">
-                    ₦9700.00
-                  </div>
-                </td>
-                <td>
-                  <div class="inner">
-                    12/2/1989
-                  </div>
-                </td>
-                <td>
-                  <div class="inner">
-                    <span class="label label-success"><i class="fa fa-flag"></i> success </span>
-                  </div>
-                </td>
-                <td>
-                  <div class="inner">
-                    <a class="btn" role="button"> details</a>
-                  </div>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      <div id="topUp"></div>
+      <div id="deposit"></div>
     </div>
+      <div class="modal hide" id="OrderModal" role="dialog" >
+        <div class="modal-header">
+          <div class="inner">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3>Orders</h3>
+          </div>
+          </div>
+        <div class="content modal-body override">
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <% content_for :javascript_contents do %>
-    <%= javascript_include_tag "histories" %>
+    <%= javascript_include_tag "orderss" %>
 <% end %>
 
-<div class="modal hide" id="editModal" role="dialog" aria-labelledby="contactPicker" aria-hidden="true">
-  <div class="modal-header">
-    <div class="inner">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-      <div class="contactHeader">
-        <div class="icon">
-          <i class="fa fa-shopping-cart"></i>
-        </div>
-        <div class="info indent">
-          <h3>Checkout</h3>
-        </div>
+
+<script id="progress-tmpl" type="text/x-jquery-tmpl">
+  <div class="progressState">
+    <div class="alert alert-info">
+      Loading...
+    </div>
+  </div>
+</script>
+
+<script id="error-tmpl" type="text/x-jquery-tmpl">
+  <div class="progressState">
+    <div class="alert alert-error">
+      {{html message}}
+    </div>
+  </div>
+</script>
+  <script id="default-dialog-tmpl" type="text/x-jquery-tmpl">
+    <div class="modal-header">
+      <div class="inner">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>Orders</h3>
       </div>
     </div>
-
-  </div>
-  <div class="content modal-body override">
-    <div class="modal-content-body">
-
-      <div class="pay-slip row-fluid letterPressed">
-        <ul class="span6">
-          <li class="row-fluid info-block ">
-            <div class="span6 title">Order No</div>
-            <div class="span6 value">989889</div>
-          </li>
-          <li class="row-fluid info-block ">
-            <div class="span6 title">Credit</div>
-            <div class="span6 value">₦10,000</div>
-          </li>
-          <li class="row-fluid info-block ">
-            <div class="span6 title">Amount</div>
-            <div class="span6 value">₦ 9700</div>
-          </li>
-          <li class="row-fluid info-block">
-            <div class="span6 title">Convenience Fee</div>
-            <div class="span6 value">₦ 150</div>
-          </li>
-          <li class="row-fluid info-block">
-            <div class="span6 title">Payment Method</div>
-            <div class="span6 value">Bank Deposit</div>
-          </li>
-          <li class="row-fluid info-block">
-            <div class="span6 title">Total Due</div>
-            <div class="span6 value"><span class="label total label-important"> ₦ 9850 </span></div>
-          </li>
-        </ul>
-        <div class="notice-info span6">
-          <div class="alert alert-info">
-            Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.
-            Donec id elit non mi porta gravida at eget metus. <i class="fa fa-lock"></i>
-          </div>
-
-          <div class="alert alert-warning">
-            <i class="fa fa-warning"></i> Your Order is pending
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-danger" ><i class="fa fa-times"></i> Cancel</button>
-    <button class="btn btn-primary"><i class="fa fa-check"></i> Pay Now &raquo;</button>
-    <div class="shadow-top-wrap">
-      <div class="shadow-bottom"></div>
-    </div>
-  </div>
-</div>
-
+    <div class="content modal-body override"></div>
+  </script>
 </div>

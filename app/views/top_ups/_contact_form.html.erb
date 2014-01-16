@@ -11,11 +11,11 @@
                       <a class="op ">
                         <div class="inner">
                           <div class="avatar small">
-                            <%= image_tag "avatar.png" %>
+                            <%= image_tag  top_up.contact.photo.url(:icon) %>
                           </div>
                           <div class="user-info">
-                            <h6 class="light-header">Paul</h6>
-                            <p><i class="icon-phone"></i> 08099447050</p>
+                            <h6 class="light-header"><%= top_up.contact.name %></h6>
+                            <p><i class="icon-phone"></i> <%= top_up.contact.phone_number.number %></p>
                           </div>
                         </div>
                       </a>

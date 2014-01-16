@@ -1,4 +1,4 @@
-<%= simple_form_for(deposit, :html =>{:id=>"deposit-form",:class=>"hide white form-horizontal letterPressed"}, :url =>   deposit_user_wallets_path(current_user)) do |f| %>
+<%= simple_form_for(order, :html =>{:id=>"deposit-form",:class=>"hide white form-horizontal letterPressed"}, :url =>   deposit_user_wallets_path(current_user)) do |f| %>
    <div class="field-wrap">
     <div class="control-group">
       <%= f.fields_for :item do|i|   %>
@@ -9,26 +9,16 @@
       <% end %>
     </div>
 
-    <% if @deposit.errors.any? %>
-        <div class="control-group error">
-          <%=f.label :name,:class=>"control-label",:required =>false do  %>
-              <i class="icon-credit-card"></i> Payment Method
-          <% end %>
-          <div class="controls input_padding_extra">
-            <%= f.select(:payment_processor_id, options_from_collection_for_select_with_attributes(payment_methods, 'id', 'name', 'class', 'klass'),{:prompt => "Choose a Payment Method"}, {:id=>"payment_method",:data=>{"class"=>"span8"},:class=>"span8 selectMenu"}) %>
-            <p class="help-inline"><%= deposit.errors[:payment_processor_id].join(" , ") %></p>
-          </div>
-        </div>
-    <% else %>
-        <div class="control-group">
-          <%=f.label :name,:class=>"control-label",:required =>false do  %>
-              <i class="icon-credit-card"></i> Payment Method
-          <% end %>
-          <div class="controls input_padding_extra">
-            <%= f.select(:payment_processor_id, options_from_collection_for_select_with_attributes(payment_methods, 'id', 'name', 'class', 'klass'),{:prompt => "Choose a Payment Method"}, {:id=>"payment_method",:data=>{"class"=>"span8"},:class=>"span8 selectMenu"}) %>
-          </div>
-        </div>
-    <% end %>
+
+     <div class="control-group <%= field_class order,:payment_processor_id %>">
+       <%=f.label :name,:class=>"control-label",:required =>false do  %>
+           <i class="icon-credit-card"></i> Payment Method
+       <% end %>
+       <div class="controls input_padding_extra">
+         <%= f.select(:payment_processor_id, options_from_collection_for_select_with_attributes(wallet_payment_methods, 'id', 'name', 'class', 'klass'),{:prompt => "Choose a Payment Method"}, {:id=>"payment_method",:data=>{"class"=>"span8"},:class=>"span8 selectMenu"}) %>
+         <%= error_html order,:payment_processor_id %>
+       </div>
+     </div>
 
     <div class="control-group">
       <div class="controls controls-row input_padding_extra ">

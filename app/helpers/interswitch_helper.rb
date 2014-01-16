@@ -83,20 +83,20 @@ module InterswitchHelper
   def query_order_status(order)
     transaction=get_order_status(order)
     logger.info("transaction response: #{transaction}")
-    process_transaction(order,transaction)
+    process_transaction(order,transaction) unless transaction.nil?
   end
 
   def process_transaction(order,transaction)
     logger.info("transaction: #{transaction}")
-    if order.pending? || order.processing?
+    if order.confirmed?
     order.response_code=transaction["ResponseCode"]
     order.response_description = transaction["ResponseDescription"]
     order.save
     case order.response_code
       when "00"
-        order.success
+        order.payed
       else
-        order.failure
+        order.failed
     end
   end
   end

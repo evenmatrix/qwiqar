@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131215115648) do
+ActiveRecord::Schema.define(:version => 20131229123056) do
 
   create_table "carriers", :force => true do |t|
     t.string   "name"
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(:version => 20131215115648) do
   create_table "contacts", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "carrier"
     t.string   "phone_number"
     t.integer  "user_id"
     t.integer  "contact_group_id"
@@ -83,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20131215115648) do
     t.string   "itemable_type"
     t.datetime "created_at",                                                  :null => false
     t.datetime "updated_at",                                                  :null => false
+    t.string   "state"
   end
 
   add_index "items", ["itemable_id"], :name => "index_items_on_itemable_id"
@@ -96,6 +96,9 @@ ActiveRecord::Schema.define(:version => 20131215115648) do
     t.integer  "transaction_id"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
+    t.string   "response_code"
+    t.string   "response_description"
+    t.string   "payment_method"
   end
 
   add_index "orders", ["payment_processor_id"], :name => "index_orders_on_payment_processor_id"
@@ -134,23 +137,22 @@ ActiveRecord::Schema.define(:version => 20131215115648) do
   create_table "top_ups", :force => true do |t|
     t.string   "message"
     t.integer  "sender_id"
+    t.string   "top_genie_id"
+    t.string   "top_genie_status"
     t.integer  "receiver_id"
     t.integer  "phone_number_id"
     t.integer  "contact_id"
     t.boolean  "delivered"
     t.string   "type"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.string   "top_genie_order_id"
-    t.string   "top_genie_order_status"
-    t.string   "top_genie_order_status_description"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   add_index "top_ups", ["contact_id"], :name => "index_top_ups_on_contact_id"
   add_index "top_ups", ["phone_number_id"], :name => "index_top_ups_on_phone_number_id"
   add_index "top_ups", ["receiver_id"], :name => "index_top_ups_on_receiver_id"
   add_index "top_ups", ["sender_id"], :name => "index_top_ups_on_sender_id"
-  add_index "top_ups", ["top_genie_order_id"], :name => "index_top_ups_on_top_genie_order_id"
+  add_index "top_ups", ["top_genie_id"], :name => "index_top_ups_on_top_genie_id"
 
   create_table "users", :force => true do |t|
     t.string   "first_name"

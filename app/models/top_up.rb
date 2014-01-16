@@ -1,3 +1,4 @@
+include TopUpGenieHelper
 class TopUp < ActiveRecord::Base
   attr_accessor :payment_processor_id
   attr_accessible :message ,:item_attributes, :payment_processor_id
@@ -8,41 +9,19 @@ class TopUp < ActiveRecord::Base
 
   accepts_nested_attributes_for :item
   UNITS=[200,400,500,750]
-  #check if requisition exist
-    #yes check if requisition has been cleared
-        #yes notify requisition cleared
-    #no
-        #clear requisition
-  #no
-     #create requisition and clear
 
-  def deliver(order)
-
+  def on_top_up_delivered(top_up_genie_order)
+    self.top_up_genie_status =top_up_genie_order[:orderstatus]
+    self.item.delivered
+      #send mail/sms
   end
 
-
-  #we are cleared to proceed with delivery
-  #attempt deliver a couple of times if it succeeds
-  #set delivery state to true
-  #if deliver fails deposit the requisition back to vault and wait for trigger
-  def on_requisition_cleared(requisition)
-
+  def on_top_failed
+    self.item.failed
   end
 
-  def save_top_genie_order(order)
-    self.top_up_genie_order_id=top_up_genie_order[:id]
-    save
-  end
-  #desired target state indicating successful top_up  delivered=true
-  def on_delivered(top_up_genie_order)
-      self.top_up_genie_order_status =top_up_genie_order[:orderstatus]
-      self.top_up_genie_order_description=top_up_genie_order[:description]
-      self.delivered=true
-      self.save
-  end
-
-  def on_deliveryError(top_up_genie_order)
-
+  def on_order_success(order)
+    top_up(self)
   end
 
   def on_order_cancelled(order)
@@ -50,11 +29,25 @@ class TopUp < ActiveRecord::Base
     #release_item
   end
 
-  private
-
-  def do_deliver
-
+  def save_top_genie_order(top_up_genie_order)
+    self.top_up_genie_id=top_up_genie_order[:id]
+    self.top_up_genie_status =top_up_genie_order[:orderstatus]
+    save
   end
+
+  def deliver
+    if self.top_up_genie_id.present?
+      query_top_up_status(self)
+    else
+      top_up(self)
+    end
+  end
+
+  def name
+    "Top Up"
+  end
+
+
 
 end
 

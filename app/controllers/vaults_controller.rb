@@ -5,7 +5,7 @@ class VaultsController < ApplicationController
     @vaults = Vault.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.erbb
       format.json { render json: @vaults }
     end
   end

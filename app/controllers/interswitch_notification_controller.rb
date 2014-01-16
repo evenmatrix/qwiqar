@@ -1,4 +1,5 @@
 include InterswitchHelper
+include TopUpGenieHelper
 class InterswitchNotificationController < ApplicationController
   #before_filter :authenticate_user!,:only=>:show_order_status
 

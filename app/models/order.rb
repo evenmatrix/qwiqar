@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
 
   after_create    :save_transaction_id
 
-  scope :completed_orders, -> {with_state(:successful)}
+  scope :completed_orders, -> {with_state(:payed)}
   scope :cancelled_orders, ->    {with_state(:cancelled)}
   scope :confirmed_orders, ->   {with_state(:confirmed)}
   scope :pending_orders, ->   {with_state(:pending)}
@@ -25,31 +25,34 @@ class Order < ActiveRecord::Base
   scope :today, where("date(created_at) = ?", Date.today)
 
   state_machine initial: :pending    do
-    after_transition :confirmed => :successful, :do => :on_order_success
-    after_transition :confirmed => :cancelled, :do => :on_order_failed
-    after_transition :confirmed => :cancelled, :do => :on_order_cancelled
-    after_transition :confirmed => [:failed,:successful], :do => :send_mail
+    after_transition :processing => :payed, :do => :on_order_success
+    after_transition :failed => :payed, :do => :on_order_success
+    after_transition :pending => :payed,:do => :on_order_success,:if => lambda {|order|order.payment_processor.name == "wallet"}
+    after_transition :processing => :failed, :do => :on_order_failed
+    after_transition :processing => [:failed,:payed], :do => :send_mail
     after_transition :pending => :cancelled, :do => :on_order_cancelled
-    after_transition :pending => :confirmed, :do => :on_order_confirmed
+    after_transition :pending => :processing, :do => :on_order_confirmed
     after_transition any => :processing do |order, transition|
+  end
 
+    event :payed do
+      transition :failed => :payed
+      transition :processing => :payed
+      transition :pending => :payed,:if => lambda {|order|order.payment_processor.name == "wallet"}
     end
 
-    event :success do
-      transition :confirmed => :successful
-    end
-
-    event :failure do
-      transition :confirmed => :cancelled
+    event :failed do
+      transition :failed => :failed
+      transition :processing => :failed
+      transition :pending => :failed,:if => lambda {|order|order.payment_processor.name == "wallet"}
     end
 
     event :cancel do
       transition :pending => :cancelled
-      transition :confirmed => :cancelled
     end
 
-    event :confirm do
-      transition :pending => :confirmed
+    event :process do
+      transition :pending => :processing
     end
 
   end
@@ -76,8 +79,8 @@ class Order < ActiveRecord::Base
     #release_item
   end
 
-  def confirmed?
-    self.state == "confirmed"
+  def processing?
+    self.state == "processing"
   end
 
   def failed?
@@ -92,23 +95,9 @@ class Order < ActiveRecord::Base
     self.state == "pending"
   end
 
-  def success?
-    self.state == "successful"
+  def payed?
+    self.state == "payed"
   end
-
-  def transaction_message
-    if response_code == "51"
-      "Insufficient Funds"
-    elsif response_code == "54"
-      "Expired card"
-    elsif response_code == "55"
-      "Incorrect PIN"
-    else
-      "Transaction Error"
-    end
-  end
-
-
   # Called before validation.  sets the order number, if the id is nil the order number is bogus
   #
   # @param none
@@ -153,6 +142,10 @@ class Order < ActiveRecord::Base
   def release_item
     self.item=nil
     save
+  end
+
+  def total_amount
+    self.item.amount
   end
 
   def to_json
